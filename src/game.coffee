@@ -68,7 +68,7 @@ create = ->
   balls.addMultiple [ballOne, ballTwo]
 
   scoreTextOne = game.add.text 20, 20, "Score: #{ballOne.score}", fontSize: '32px', fill: '#FFF'
-  scoreTextTwo = game.add.text 660, 20, "Score: #{ballTwo.score}", fontSize: '32px', fill: '#FFF'
+  scoreTextTwo = game.add.text game.world.width - 135, 20, "Score: #{ballTwo.score}", fontSize: '32px', fill: '#FFF'
 
 update = ->
   playerOne.update()
@@ -82,4 +82,4 @@ update = ->
   game.physics.arcade.collide balls, level.tilesGroup, level.onCollide
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
 
-game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
+game = new Phaser.Game window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update }
