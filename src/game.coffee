@@ -28,7 +28,7 @@ preload = ->
   # Load background
   game.load.image 'background', 'lib/assets/img/background.jpg'
 
-  # Loading tiles
+  # Loading bricks
   game.load.image 'brick_blue', 'lib/assets/img/element_blue_rectangle_v.png'
   game.load.image 'brick_green', 'lib/assets/img/element_green_rectangle_v.png'
   game.load.image 'brick_yellow', 'lib/assets/img/element_yellow_rectangle_v.png'
@@ -44,6 +44,9 @@ preload = ->
   # Loading balls
   game.load.image 'ballOne', 'lib/assets/img/ballGrey.png'
   game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
+
+  # Load droppables
+  Droppable.loadAssets()
 
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
