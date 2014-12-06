@@ -26,6 +26,10 @@ preload = ->
   game.load.image 'paddleOne', 'lib/assets/img/paddleBlu_v.png'
   game.load.image 'paddleTwo', 'lib/assets/img/paddleRed_v.png'
 
+  # Loading balls
+  game.load.image 'ballOne', 'lib/assets/img/ballGrey.png'
+  game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
+
 create = ->
   level = new Level level_map
   level.create()
