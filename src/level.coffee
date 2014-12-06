@@ -48,7 +48,8 @@ class Level
     drop.x = brick.sprite.x
     drop.y = brick.sprite.y + brick.sprite.height / 2.0 - drop.height / 2.0
     direction = if ball.player.id == Player.RIGHT then 1 else -1
-    drop.body.velocity = x: direction * 300, y: game.rnd.integerInRange -100, 100
-    console.log 'velocity: ', drop.body.velocity, 'direction: ', direction
+    drop.body.velocity =
+      x: game.rnd.integerInRange 200, 300 * direction
+      y: game.rnd.integerInRange -100, 100
     drop.body.bounce = x: 1, y: 1
     drop.body.collideWorldBounds = true
