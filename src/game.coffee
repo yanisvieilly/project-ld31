@@ -25,6 +25,9 @@ level_map = [
 ###
 
 preload = ->
+  # Load background
+  game.load.image 'background', 'lib/assets/img/background.jpg'
+
   # Loading tiles
   game.load.image 'tile_blue', 'lib/assets/img/element_blue_rectangle_v.png'
   game.load.image 'tile_green', 'lib/assets/img/element_green_rectangle_v.png'
@@ -46,6 +49,8 @@ create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
   # game.physics.arcade.checkCollision.left = false
   # game.physics.arcade.checkCollision.right = false
+
+  game.add.sprite 0, 0, 'background'
 
   level = new Level level_map
   level.create()

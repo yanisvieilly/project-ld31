@@ -6,8 +6,6 @@ class Tile
       @breakCount = 0
 
     onCollide: ->
-      console.log @sprite.animations.frameTotal
-
       if @sprite.animations.frame == @sprite.animations.frameTotal - 1
         @break()
         return 10
