@@ -30,6 +30,7 @@ class Level
 
   onCollide: (ballSprite, tileSprite) =>
     @tiles[tileSprite.name].onCollide()
+    ballSprite.score += 10
 
 
   _getRect: (levelMap) ->

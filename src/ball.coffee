@@ -9,6 +9,8 @@ class Ball extends Phaser.Sprite
     @body.bounce = x: 1, y: 1
     @body.collideWorldBounds = true
 
+    @score = 0
+
   onPlayerCollide: (player) ->
     if @y < player.y
       @body.velocity.y = (player.y - @y) * -3

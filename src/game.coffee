@@ -5,6 +5,8 @@ ballOne = null
 ballTwo = null
 balls = null
 level = null
+scoreTextOne = ''
+scoreTextTwo = ''
 level_map = [
   ['tile_red', 'tile_red']
   ['tile_purple', 'tile_purple']
@@ -55,11 +57,17 @@ create = ->
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]
 
+  scoreTextOne = game.add.text 20, 20, "Score: #{ballOne.score}", fontSize: '32px', fill: '#FFF'
+  scoreTextTwo = game.add.text 660, 20, "Score: #{ballTwo.score}", fontSize: '32px', fill: '#FFF'
+
 update = ->
   playerOne.update()
   playerTwo.update()
   ballOne.update()
   ballTwo.update()
+
+  scoreTextOne.text = "Score: #{ballOne.score}"
+  scoreTextTwo.text = "Score: #{ballTwo.score}"
 
   game.physics.arcade.collide balls, level.tilesGroup, level.onCollide
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
