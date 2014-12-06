@@ -14,5 +14,7 @@ class Ball extends Phaser.Sprite
       @body.velocity.y = (player.y - @y) * -3
     else if @y > player.y
       @body.velocity.y = (@y - player.y) * 3
+    else
+      @body.velocity.y = game.rnd.integerInRange -1, 1
 
   update: ->
