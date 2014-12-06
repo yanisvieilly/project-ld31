@@ -48,4 +48,6 @@ update = ->
 
   ballOne.update()
 
+  game.physics.arcade.collide ballOne.item, playerOne.item
+
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
