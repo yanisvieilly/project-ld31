@@ -1,8 +1,9 @@
 SPEED = 5
-PLAYER_LEFT = 0
-PLAYER_RIGHT = 1
 
 class Player extends Phaser.Sprite
+  @LEFT = 0
+  @RIGHT = 1
+
   constructor: (game, x, y, image, cursors, @id) ->
     super game, x, y, image
 
@@ -30,7 +31,7 @@ class Player extends Phaser.Sprite
 
   shoot: ->
     if @weaponType > 0
-      if @id == PLAYER_LEFT
+      if @id == Player.LEFT
         new Bullet game, @x + 25, @y, 'bulletLeftOne', 1, @bullets
       else
         new Bullet game, @x - 25, @y, 'bulletRightOne', -1, @bullets

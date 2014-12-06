@@ -8,12 +8,21 @@ level = null
 scoreTextOne = ''
 scoreTextTwo = ''
 level_map = [
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
   ['brk3_grey', 'brick_red']
   ['brk3_grey', 'brick_purple']
   ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
   ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
   ['brk3_grey', 'brick_red']
   ['brk3_grey', 'brick_purple']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+
 ]
 
 # loadSprite = (id, image, size) ->
@@ -69,8 +78,8 @@ create = ->
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
 
-  ballOne = new Ball game, 40, 300, 'ballOne'
-  ballTwo = new Ball game, game.world.width - 40, 300, 'ballTwo'
+  ballOne = new Ball game, 40, 300, 'ballOne', playerOne
+  ballTwo = new Ball game, game.world.width - 40, 300, 'ballTwo', playerTwo
 
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]

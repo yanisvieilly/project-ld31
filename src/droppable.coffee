@@ -11,7 +11,7 @@ class Droppable
     for key, droppableInfo of @types
       game.load.image droppableInfo.spriteId, droppableInfo.img
 
-  createFromType: (type) ->
+  @createFromType: (type) ->
     throw new Error("Undefined droppable type: #{type}") if !@types[type]
 
     info = @types[type]

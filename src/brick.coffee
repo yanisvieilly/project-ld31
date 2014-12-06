@@ -5,13 +5,20 @@ class Brick
       @breakSequence = [@break]
       @breakCount = 0
 
-    onCollide: ->
+    onBallCollide: (ball) ->
       if @sprite.animations.frame == @sprite.animations.frameTotal - 1
         @break()
-        return 10
+
+        droppable = Droppable.createFromType 'WEAPON'
+        res =
+          score: 10
+          droppable: droppable
+        return res
       else
         @sprite.frame += 1
-        return 0
+        res =
+          score: 0
+        return res
 
     break: =>
       @sprite.kill()

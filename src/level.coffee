@@ -2,6 +2,8 @@ class Level
   constructor: (levelMap) ->
     @levelMap = levelMap
 
+    @droppablesGroup = game.add.group()
+
   create: ->
     @bricksGroup = game.add.group()
     @bricksGroup.enableBody = true
@@ -23,9 +25,11 @@ class Level
         x += BRICK_SIZE.width
         idx++
 
-  onCollide: (ballSprite, brickSprite) =>
-    score = @bricks[brickSprite.name].onCollide()
-    ballSprite.score += score
+  onCollide: (ball, brickSprite) =>
+    brick = @bricks[brickSprite.name]
+    res = brick.onBallCollide(ball)
+    ball.score += res.score
+    @_addDroppable res.droppable, brick, ball if res.droppable
 
 
   _getRect: (levelMap) ->
@@ -37,3 +41,13 @@ class Level
     height = levelMap.length * BRICK_SIZE.height
 
     return {width: width, height: height}
+
+  _addDroppable: (droppable, brick, ball) ->
+    drop = @droppablesGroup.create 0, 0, droppable.spriteId
+    game.physics.arcade.enable drop
+    drop.x = brick.sprite.x
+    drop.y = brick.sprite.y + brick.sprite.height / 2.0 - drop.height / 2.0
+    direction = (ball.player.id == Player.RIGHT) ? 1 : -1
+    drop.body.velocity = x: direction * 300, y: game.rnd.integerInRange -100, 100
+    drop.body.bounce = x: 1, y: 1
+    drop.body.collideWorldBounds = true
