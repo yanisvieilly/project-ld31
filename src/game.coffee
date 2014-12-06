@@ -1,6 +1,9 @@
 playerOne = null
 playerTwo = null
+players = null
 ballOne = null
+ballTwo = null
+balls = null
 level = null
 level_map = [
   ['tile_red', 'tile_red']
@@ -34,6 +37,8 @@ preload = ->
 
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
+  game.physics.arcade.checkCollision.left = false
+  game.physics.arcade.checkCollision.right = false
 
   level = new Level level_map
   level.create()
@@ -41,19 +46,23 @@ create = ->
   playerOne = new Player 10, 248, 'paddleOne', up: Phaser.Keyboard.Z, down: Phaser.Keyboard.S
   playerTwo = new Player 766, 248, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
 
-  ballOne = new Ball 60, 289, 'ballOne'
+  players = game.add.group()
+  players.addMultiple [playerOne.item, playerTwo.item]
 
+  ballOne = new Ball 60, 289, 'ballOne'
+  ballTwo = new Ball game.world.width - 60 - 22, 289, 'ballTwo'
+
+  balls = game.add.group()
+  balls.addMultiple [ballOne.item, ballTwo.item]
 
 update = ->
 
-  # console.log(level.tiles)
-
-  # game.physics.arcade.overlap(ballOne.item, level.tiles, level.onCollide, null, this)
   playerOne.update()
   playerTwo.update()
   ballOne.update()
+  ballTwo.update()
 
-  game.physics.arcade.collide ballOne.item, playerOne.item
-  game.physics.arcade.collide ballOne.item, level.tilesGroup, level.onCollide
+  game.physics.arcade.collide balls, level.tilesGroup, level.onCollide
+  game.physics.arcade.collide balls, players
 
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
