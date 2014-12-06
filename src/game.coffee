@@ -37,6 +37,8 @@ preload = ->
 
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
+  game.physics.arcade.checkCollision.left = false
+  game.physics.arcade.checkCollision.right = false
 
   level = new Level level_map
   level.create()
