@@ -45,6 +45,8 @@ preload = ->
   game.load.image 'ballOne', 'lib/assets/img/ballGrey.png'
   game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
 
+  game.load.image 'bullet', 'lib/assets/img/bullet.png'
+
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
   # game.physics.arcade.checkCollision.left = false
@@ -57,8 +59,8 @@ create = ->
   level = new Level level_map
   level.create()
 
-  playerOne = new Player game, 25, 300, 'paddleOne', up: Phaser.Keyboard.Z, down: Phaser.Keyboard.S
-  playerTwo = new Player game, game.world.width - 25, 300, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
+  playerOne = new Player game, 25, 300, 'paddleOne', up: Phaser.Keyboard.E, down: Phaser.Keyboard.D, shoot: Phaser.Keyboard.SPACEBAR, 0
+  playerTwo = new Player game, game.world.width - 25, 300, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN, shoot: Phaser.Keyboard.ENTER, 1
 
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
