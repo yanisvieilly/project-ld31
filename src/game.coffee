@@ -1,4 +1,6 @@
 preload = ->
+  game.load.image('paddleOne', 'lib/assets/paddleBlu.png');
+  game.load.image('paddleTwo', 'lib/assets/paddleRed.png');
 
 create = ->
 
