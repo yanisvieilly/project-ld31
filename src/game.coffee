@@ -2,10 +2,11 @@ playerOne = null
 playerTwo = null
 level_map = [
   ['tile_red', 'tile_red']
-  ['tile_yellow', 'tile_yellow']
-  ['tile_yellow', 'tile_yellow']
-  ['tile_blue', 'tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue', 'tile_blue']
-  ['tile_blue', 'tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue', 'tile_blue']
+  ['tile_purple', 'tile_purple']
+  ['tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
+  ['tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
+  ['tile_red', 'tile_red']
+  ['tile_purple', 'tile_purple']
 ]
 
 ###

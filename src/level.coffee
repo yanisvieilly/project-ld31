@@ -5,20 +5,17 @@ class Level
     @levelMap = levelMap
 
   create: ->
-    console.log 'create'
-    console.log 'rect: ', @_getRect(@levelMap)
-
     rect = @_getRect(@levelMap)
     x = 0
     y = game.world.height / 2.0 - rect.height / 2.0
+    @tiles = []
     for line, lineIdx in @levelMap
-      console.log line
+      tilesLine = []
       lineWidth = line.length * TILE_SIZE.width
       x = game.world.width / 2.0 - lineWidth / 2.0
       y += TILE_SIZE.height if lineIdx > 0
       for tile, tileIdx in line
-        console.log tile, x, y
-        game.add.sprite x, y, tile if tile != 'void'
+        tilesLine.push new Tile(x, y, tile)
         x += TILE_SIZE.width
 
   _getRect: (levelMap) ->
