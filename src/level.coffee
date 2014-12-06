@@ -17,7 +17,7 @@ class Level
       x = game.world.width / 2.0 - lineWidth / 2.0
       y += TILE_SIZE.height if lineIdx > 0
       for tile, tileIdx in line
-        tile = new Tile(x, y, tile, @tiles)
+        tile = new Tile(x, y, tile, @tiles) if tile != 'void'
         x += TILE_SIZE.width
 
 
