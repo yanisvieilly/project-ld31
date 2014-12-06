@@ -49,11 +49,11 @@ create = ->
   players = game.add.group()
   players.addMultiple [playerOne.item, playerTwo.item]
 
-  ballOne = new Ball 60, 289, 'ballOne'
-  ballTwo = new Ball game.world.width - 60 - 22, 289, 'ballTwo'
+  ballOne = new Ball game, 60, 289, 'ballOne'
+  ballTwo = new Ball game, game.world.width - 60 - 22, 289, 'ballTwo'
 
   balls = game.add.group()
-  balls.addMultiple [ballOne.item, ballTwo.item]
+  balls.addMultiple [ballOne, ballTwo]
 
 update = ->
 
