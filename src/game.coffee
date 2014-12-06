@@ -1,10 +1,11 @@
 playerOne = null
 playerTwo = null
 level_map = [
-  ['tile_blue', 'tile_green', 'tile_blue'],
-  ['tile_blue', 'tile_green', 'tile_blue'],
-  ['tile_blue', 'tile_green', 'tile_blue'],
-  ['tile_blue', 'tile_green', 'tile_blue']
+  ['tile_red', 'tile_red']
+  ['tile_yellow', 'tile_yellow']
+  ['tile_yellow', 'tile_yellow']
+  ['tile_blue', 'tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue', 'tile_blue']
+  ['tile_blue', 'tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue', 'tile_blue']
 ]
 
 ###
@@ -12,8 +13,15 @@ level_map = [
 ###
 
 preload = ->
+  # Loading tiles
   game.load.image 'tile_blue', 'lib/assets/img/element_blue_rectangle_v.png'
   game.load.image 'tile_green', 'lib/assets/img/element_green_rectangle_v.png'
+  game.load.image 'tile_yellow', 'lib/assets/img/element_yellow_rectangle_v.png'
+  game.load.image 'tile_purple', 'lib/assets/img/element_purple_rectangle_v.png'
+  game.load.image 'tile_red', 'lib/assets/img/element_red_rectangle_v.png'
+  game.load.image 'tile_grey', 'lib/assets/img/element_grey_rectangle_v.png'
+
+  # Loading paddles
   game.load.image 'paddleOne', 'lib/assets/img/paddleBlu_v.png'
   game.load.image 'paddleTwo', 'lib/assets/img/paddleRed_v.png'
 

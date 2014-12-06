@@ -18,7 +18,7 @@ class Level
       y += TILE_SIZE.height if lineIdx > 0
       for tile, tileIdx in line
         console.log tile, x, y
-        game.add.sprite x, y, tile
+        game.add.sprite x, y, tile if tile != 'void'
         x += TILE_SIZE.width
 
   _getRect: (levelMap) ->
