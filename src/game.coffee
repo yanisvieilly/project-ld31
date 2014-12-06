@@ -2,6 +2,8 @@ playerOne = null
 playerTwo = null
 players = null
 ballOne = null
+ballTwo = null
+balls = null
 level = null
 level_map = [
   ['tile_red', 'tile_red']
@@ -46,17 +48,20 @@ create = ->
   players.addMultiple [playerOne.item, playerTwo.item]
 
   ballOne = new Ball 60, 289, 'ballOne'
-  console.log level.tiles
+  ballTwo = new Ball game.world.width - 60 - 22, 289, 'ballTwo'
 
+  balls = game.add.group()
+  balls.addMultiple [ballOne.item, ballTwo.item]
 
 update = ->
 
   # console.log(level.tiles)
-  game.physics.arcade.collide(ballOne.item, level.tiles)
+  game.physics.arcade.collide balls, level.tiles
   playerOne.update()
   playerTwo.update()
   ballOne.update()
+  ballTwo.update()
 
-  game.physics.arcade.collide ballOne.item, players
+  game.physics.arcade.collide balls, players
 
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
