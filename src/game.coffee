@@ -77,8 +77,8 @@ create = ->
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
 
-  ballOne = new Ball game, 40, 300, 'ballOne'
-  ballTwo = new Ball game, game.world.width - 40, 300, 'ballTwo'
+  ballOne = new Ball game, 40, 300, 'ballOne', playerOne
+  ballTwo = new Ball game, game.world.width - 40, 300, 'ballTwo', playerTwo
 
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]
