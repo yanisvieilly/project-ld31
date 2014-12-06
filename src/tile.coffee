@@ -1,7 +1,8 @@
 class Tile
-    constructor: (x, y, imgName, tilesGroup) ->
-      @item = tilesGroup.create x, y, imgName
-      @item.body.immovable = true
+    constructor: (sprite) ->
+      # @item = tilesGroup.create x, y, imgName
+      @sprite = sprite
+      @sprite.body.immovable = true
       @breakSequence = [@break]
       @breakCount = 0
 
@@ -11,5 +12,5 @@ class Tile
       @breakSequence[@breakCount]()
       @breakCount++
 
-    break: ->
-      @item.kill()
+    break: =>
+      @sprite.kill()

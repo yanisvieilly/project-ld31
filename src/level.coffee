@@ -5,20 +5,31 @@ class Level
     @levelMap = levelMap
 
   create: ->
-    @tiles = game.add.group()
-    @tiles.enableBody = true
+    @tilesGroup = game.add.group()
+    @tilesGroup.enableBody = true
+    @tiles = {}
 
     rect = @_getRect(@levelMap)
     x = 0
     y = game.world.height / 2.0 - rect.height / 2.0
+    idx = 0
     for line, lineIdx in @levelMap
       tilesLine = []
       lineWidth = line.length * TILE_SIZE.width
       x = game.world.width / 2.0 - lineWidth / 2.0
       y += TILE_SIZE.height if lineIdx > 0
-      for tile, tileIdx in line
-        tile = new Tile(x, y, tile, @tiles) if tile != 'void'
+      for tileName, tileIdx in line
+        if tileName != 'void'
+          tileSprite = @tilesGroup.create x, y, tileName
+          tileSprite.name = "tile_#{idx}"
+          @tiles[tileSprite.name] = new Tile(tileSprite)
         x += TILE_SIZE.width
+        idx++
+
+    console.log('finished, tiles: ', @tiles)
+
+  onCollide: (ballSprite, tileSprite) =>
+    @tiles[tileSprite.name].onCollide()
 
 
   _getRect: (levelMap) ->

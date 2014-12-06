@@ -42,17 +42,18 @@ create = ->
   playerTwo = new Player 766, 248, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
 
   ballOne = new Ball 60, 289, 'ballOne'
-  console.log level.tiles
 
 
 update = ->
 
   # console.log(level.tiles)
-  game.physics.arcade.collide(ballOne.item, level.tiles)
+
+  # game.physics.arcade.overlap(ballOne.item, level.tiles, level.onCollide, null, this)
   playerOne.update()
   playerTwo.update()
   ballOne.update()
 
   game.physics.arcade.collide ballOne.item, playerOne.item
+  game.physics.arcade.collide ballOne.item, level.tilesGroup, level.onCollide
 
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
