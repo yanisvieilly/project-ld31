@@ -38,5 +38,6 @@ class Player extends Phaser.Sprite
       else
         @bullets.add new Bullet game, @x - 25, @y, 'bulletRightOne', -1
 
-  onBulletCollide: (player, bullet) ->
+  onBulletCollide: (player, bullet) =>
     @life -= 10
+    bullet.kill()
