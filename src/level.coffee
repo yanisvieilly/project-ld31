@@ -28,7 +28,6 @@ class Level
   onCollide: (ball, brickSprite) =>
     brick = @bricks[brickSprite.name]
     res = brick.onBallCollide(ball)
-    ball.score += res.score
     @_addDroppable res.droppable, brick, ball if res.droppable
 
 
