@@ -1,8 +1,9 @@
 preload = ->
-  game.load.image('paddleOne', 'lib/assets/paddleBlu.png');
-  game.load.image('paddleTwo', 'lib/assets/paddleRed.png');
+  game.load.image 'paddleOne', 'lib/assets/paddleBlu.png'
+  game.load.image 'paddleTwo', 'lib/assets/paddleRed.png'
 
 create = ->
+  game.add.sprite 0, 300, 'paddleOne'
 
 update = ->
 
