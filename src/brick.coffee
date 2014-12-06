@@ -9,7 +9,10 @@ class Brick
       if @sprite.animations.frame == @sprite.animations.frameTotal - 1
         @break()
 
-        droppable = Droppable.createFromType 'WEAPON'
+        droppable = null
+        luckyNumber = game.rnd.integerInRange 0, 100
+        if luckyNumber < 20 #% of chances to drop an item
+          droppable = Droppable.createFromType 'WEAPON'
         res =
           score: 10
           droppable: droppable
