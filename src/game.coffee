@@ -31,6 +31,8 @@ preload = ->
   game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
 
 create = ->
+  game.physics.startSystem Phaser.Physics.ARCADE
+
   level = new Level level_map
   level.create()
 

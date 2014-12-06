@@ -1,8 +1,9 @@
 SPEED = 5
 
 class Player
-  constructor: (@x, @y, @image, cursors) ->
-    @item = game.add.sprite @x, @y, @image
+  constructor: (x, y, image, cursors) ->
+    @item = game.add.sprite x, y, image
+
     @cursors =
       up: game.input.keyboard.addKey cursors.up
       down: game.input.keyboard.addKey cursors.down
