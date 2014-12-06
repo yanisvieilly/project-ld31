@@ -9,9 +9,9 @@ class Level
     @bricksGroup.enableBody = true
     @bricks = {}
 
-    rect = @_getRect(@levelMap)
+    bricksHeight = @levelMap.length * BRICK_SIZE.height
     x = 0
-    y = game.world.height / 2.0 - rect.height / 2.0
+    y = game.world.height / 2.0 - bricksHeight / 2.0
     idx = 0
     for line, lineIdx in @levelMap
       lineWidth = line.length * BRICK_SIZE.width
@@ -29,17 +29,6 @@ class Level
     brick = @bricks[brickSprite.name]
     res = brick.onBallCollide(ball)
     @_addDroppable res.droppable, brick, ball if res.droppable
-
-
-  _getRect: (levelMap) ->
-    maxLineLength = 0
-    for line in levelMap
-      maxLineLength = Math.max maxLineLength, line.length
-
-    width = maxLineLength * BRICK_SIZE.width
-    height = levelMap.length * BRICK_SIZE.height
-
-    return {width: width, height: height}
 
   _addDroppable: (droppable, brick, ball) ->
     drop = @droppablesGroup.create 0, 0, droppable.spriteId
