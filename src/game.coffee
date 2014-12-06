@@ -43,11 +43,11 @@ create = ->
   level = new Level level_map
   level.create()
 
-  playerOne = new Player 10, 248, 'paddleOne', up: Phaser.Keyboard.Z, down: Phaser.Keyboard.S
-  playerTwo = new Player 766, 248, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
+  playerOne = new Player game, 10, 248, 'paddleOne', up: Phaser.Keyboard.Z, down: Phaser.Keyboard.S
+  playerTwo = new Player game, 766, 248, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
 
   players = game.add.group()
-  players.addMultiple [playerOne.item, playerTwo.item]
+  players.addMultiple [playerOne, playerTwo]
 
   ballOne = new Ball game, 60, 289, 'ballOne'
   ballTwo = new Ball game, game.world.width - 60 - 22, 289, 'ballTwo'

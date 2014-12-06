@@ -1,18 +1,18 @@
 SPEED = 5
 
-class Player
-  constructor: (x, y, image, cursors) ->
-    @item = game.add.sprite x, y, image
+class Player extends Phaser.Sprite
+  constructor: (game, x, y, image, cursors) ->
+    super game, x, y, image
 
     @cursors =
       up: game.input.keyboard.addKey cursors.up
       down: game.input.keyboard.addKey cursors.down
 
-    game.physics.arcade.enable @item
-    @item.body.immovable = true
+    game.physics.arcade.enable @
+    @body.immovable = true
 
   update: ->
-    if @cursors.up.isDown && @item.y > SPEED
-      @item.y -= SPEED
-    if @cursors.down.isDown && @item.y < game.world.height - @item.height - SPEED
-      @item.y += SPEED
+    if @cursors.up.isDown && @y > SPEED
+      @y -= SPEED
+    if @cursors.down.isDown && @y < game.world.height - @height - SPEED
+      @y += SPEED
