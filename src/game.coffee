@@ -45,7 +45,8 @@ preload = ->
   game.load.image 'ballOne', 'lib/assets/img/ballGrey.png'
   game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
 
-  game.load.image 'bullet', 'lib/assets/img/bullet.png'
+  game.load.image 'bulletLeftOne', 'lib/assets/img/laserBlue03.png'
+  game.load.image 'bulletRightOne', 'lib/assets/img/laserRed03.png'
 
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
