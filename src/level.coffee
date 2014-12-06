@@ -5,18 +5,21 @@ class Level
     @levelMap = levelMap
 
   create: ->
+    @tiles = game.add.group()
+    @tiles.enableBody = true
+
     rect = @_getRect(@levelMap)
     x = 0
     y = game.world.height / 2.0 - rect.height / 2.0
-    @tiles = []
     for line, lineIdx in @levelMap
       tilesLine = []
       lineWidth = line.length * TILE_SIZE.width
       x = game.world.width / 2.0 - lineWidth / 2.0
       y += TILE_SIZE.height if lineIdx > 0
       for tile, tileIdx in line
-        tilesLine.push new Tile(x, y, tile)
+        tile = new Tile(x, y, tile, @tiles)
         x += TILE_SIZE.width
+
 
   _getRect: (levelMap) ->
     maxLineLength = 0

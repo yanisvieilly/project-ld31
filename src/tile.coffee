@@ -1,3 +1,5 @@
 class Tile
-    constructor: (x, y, imgName) ->
-      @item = game.add.sprite x, y, imgName if imgName != 'void'
+    constructor: (x, y, imgName, tilesGroup) ->
+      if imgName != 'void'
+        @item = tilesGroup.create x, y, imgName
+        @item.body.immovable = true
