@@ -8,12 +8,12 @@ level = null
 scoreTextOne = ''
 scoreTextTwo = ''
 level_map = [
-  ['brk3_grey', 'tile_red']
-  ['brk3_grey', 'tile_purple']
-  ['brk3_grey', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
-  ['brk3_grey', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
-  ['brk3_grey', 'tile_red']
-  ['brk3_grey', 'tile_purple']
+  ['brk3_grey', 'brick_red']
+  ['brk3_grey', 'brick_purple']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brk3_grey', 'brick_red']
+  ['brk3_grey', 'brick_purple']
 ]
 
 # loadSprite = (id, image, size) ->
@@ -29,13 +29,13 @@ preload = ->
   game.load.image 'background', 'lib/assets/img/background.jpg'
 
   # Loading tiles
-  game.load.image 'tile_blue', 'lib/assets/img/element_blue_rectangle_v.png'
-  game.load.image 'tile_green', 'lib/assets/img/element_green_rectangle_v.png'
-  game.load.image 'tile_yellow', 'lib/assets/img/element_yellow_rectangle_v.png'
-  game.load.image 'tile_purple', 'lib/assets/img/element_purple_rectangle_v.png'
-  game.load.image 'tile_red', 'lib/assets/img/element_red_rectangle_v.png'
-  game.load.image 'tile_grey', 'lib/assets/img/element_grey_rectangle_v.png'
-  game.load.spritesheet 'brk3_grey', 'lib/assets/img/brick_brk3_grey.png', TILE_SIZE.width, TILE_SIZE.height
+  game.load.image 'brick_blue', 'lib/assets/img/element_blue_rectangle_v.png'
+  game.load.image 'brick_green', 'lib/assets/img/element_green_rectangle_v.png'
+  game.load.image 'brick_yellow', 'lib/assets/img/element_yellow_rectangle_v.png'
+  game.load.image 'brick_purple', 'lib/assets/img/element_purple_rectangle_v.png'
+  game.load.image 'brick_red', 'lib/assets/img/element_red_rectangle_v.png'
+  game.load.image 'brick_grey', 'lib/assets/img/element_grey_rectangle_v.png'
+  game.load.spritesheet 'brk3_grey', 'lib/assets/img/brick_brk3_grey.png', BRICK_SIZE.width, BRICK_SIZE.height
 
   # Loading paddles
   game.load.image 'paddleOne', 'lib/assets/img/paddleBlu_v.png'
@@ -81,7 +81,7 @@ update = ->
   scoreTextOne.text = "Score: #{ballOne.score}"
   scoreTextTwo.text = "Score: #{ballTwo.score}"
 
-  game.physics.arcade.collide balls, level.tilesGroup, level.onCollide
+  game.physics.arcade.collide balls, level.bricksGroup, level.onCollide
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
 
 game = new Phaser.Game window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update }

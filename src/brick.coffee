@@ -1,4 +1,4 @@
-class Tile
+class Brick
     constructor: (sprite) ->
       @sprite = sprite
       @sprite.body.immovable = true
