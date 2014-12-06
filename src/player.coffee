@@ -6,5 +6,7 @@ class Player
       down: game.input.keyboard.addKey cursors.down
 
   update: ->
-    @item.y -= 5 if @cursors.up.isDown
-    @item.y += 5 if @cursors.down.isDown
+    if @cursors.up.isDown && @item.y > 5
+      @item.y -= 5
+    if @cursors.down.isDown && @item.y < 491
+      @item.y += 5
