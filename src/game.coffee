@@ -28,21 +28,16 @@ initLevel = (level) ->
 preload = ->
   game.load.image 'tile_blue', 'lib/assets/img/element_blue_rectangle_v.png'
   game.load.image 'tile_green', 'lib/assets/img/element_green_rectangle_v.png'
-  game.load.image 'tile_blue', 'lib/assets/img/element_blue_rectangle_v.png'
   game.load.image 'paddleOne', 'lib/assets/img/paddleBlu_v.png'
   game.load.image 'paddleTwo', 'lib/assets/img/paddleRed_v.png'
 
 create = ->
   initLevel level
-  playerOne = game.add.sprite 10, 248, 'paddleOne'
+  playerOne = new Player 10, 248, 'paddleOne'
 
   cursors = game.input.keyboard.createCursorKeys()
 
 update = ->
-  if cursors.up.isDown
-    playerOne.y -= 5
-
-  if cursors.down.isDown
-    playerOne.y += 5
+  playerOne.update()
 
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
