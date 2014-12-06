@@ -1,6 +1,7 @@
 playerOne = null
 playerTwo = null
 ballOne = null
+level = null
 level_map = [
   ['tile_red', 'tile_red']
   ['tile_purple', 'tile_purple']
@@ -41,11 +42,15 @@ create = ->
   playerTwo = new Player 766, 248, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
 
   ballOne = new Ball 60, 289, 'ballOne'
+  console.log level.tiles
+
 
 update = ->
+
+  # console.log(level.tiles)
+  game.physics.arcade.collide(ballOne.item, level.tiles)
   playerOne.update()
   playerTwo.update()
-
   ballOne.update()
 
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
