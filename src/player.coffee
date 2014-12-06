@@ -8,6 +8,9 @@ class Player
       up: game.input.keyboard.addKey cursors.up
       down: game.input.keyboard.addKey cursors.down
 
+    game.physics.arcade.enable @item
+    @item.body.immovable = true
+
   update: ->
     if @cursors.up.isDown && @item.y > SPEED
       @item.y -= SPEED
