@@ -10,8 +10,10 @@ class Tile
 
       if @sprite.animations.frame == @sprite.animations.frameTotal - 1
         @break()
+        return 10
       else
         @sprite.frame += 1
+        return 0
 
     break: =>
       @sprite.kill()

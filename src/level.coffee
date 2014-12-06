@@ -25,8 +25,8 @@ class Level
         idx++
 
   onCollide: (ballSprite, tileSprite) =>
-    @tiles[tileSprite.name].onCollide()
-    ballSprite.score += 10
+    score = @tiles[tileSprite.name].onCollide()
+    ballSprite.score += score
 
 
   _getRect: (levelMap) ->
