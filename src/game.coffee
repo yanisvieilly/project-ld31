@@ -6,13 +6,17 @@ ballTwo = null
 balls = null
 level = null
 level_map = [
-  ['tile_red', 'tile_red']
-  ['tile_purple', 'tile_purple']
-  ['tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
-  ['tile_blue', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
-  ['tile_red', 'tile_red']
-  ['tile_purple', 'tile_purple']
+  ['brk3_grey', 'tile_red']
+  ['brk3_grey', 'tile_purple']
+  ['brk3_grey', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
+  ['brk3_grey', 'tile_blue', 'void', 'tile_blue', 'tile_blue']
+  ['brk3_grey', 'tile_red']
+  ['brk3_grey', 'tile_purple']
 ]
+
+# loadSprite = (id, image, size) ->
+#   if size
+#     game.load.spritesheet
 
 ###
 # Phaser hooks
@@ -26,6 +30,7 @@ preload = ->
   game.load.image 'tile_purple', 'lib/assets/img/element_purple_rectangle_v.png'
   game.load.image 'tile_red', 'lib/assets/img/element_red_rectangle_v.png'
   game.load.image 'tile_grey', 'lib/assets/img/element_grey_rectangle_v.png'
+  game.load.spritesheet 'brk3_grey', 'lib/assets/img/brick_brk3_grey.png', TILE_SIZE.width, TILE_SIZE.height
 
   # Loading paddles
   game.load.image 'paddleOne', 'lib/assets/img/paddleBlu_v.png'

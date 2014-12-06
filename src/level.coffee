@@ -1,5 +1,3 @@
-TILE_SIZE = {width: 32, height: 64}
-
 class Level
   constructor: (levelMap) ->
     @levelMap = levelMap
@@ -25,8 +23,6 @@ class Level
           @tiles[tileSprite.name] = new Tile(tileSprite)
         x += TILE_SIZE.width
         idx++
-
-    console.log('finished, tiles: ', @tiles)
 
   onCollide: (ballSprite, tileSprite) =>
     @tiles[tileSprite.name].onCollide()
