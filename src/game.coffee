@@ -1,25 +1,11 @@
 cursors = null
 playerOne = null
-level = [
+level_map = [
   ['tile_blue', 'tile_green', 'tile_blue'],
   ['tile_blue', 'tile_green', 'tile_blue'],
   ['tile_blue', 'tile_green', 'tile_blue'],
   ['tile_blue', 'tile_green', 'tile_blue']
 ]
-
-TILE_SIZE = {width: 32, height: 64}
-
-initLevel = (level) ->
-  x = 0
-  y = 0
-  for line, line_idx in level
-    console.log line
-    x = 0
-    y = line_idx * TILE_SIZE.height
-    for tile, tile_idx in line
-      console.log tile, x, y
-      game.add.sprite x, y, tile
-      x += TILE_SIZE.width
 
 ###
 # Phaser hooks
@@ -32,7 +18,9 @@ preload = ->
   game.load.image 'paddleTwo', 'lib/assets/img/paddleRed_v.png'
 
 create = ->
-  initLevel level
+  level = new Level level_map
+  level.create()
+
   playerOne = new Player 10, 248, 'paddleOne'
 
   cursors = game.input.keyboard.createCursorKeys()
