@@ -43,26 +43,25 @@ create = ->
   level = new Level level_map
   level.create()
 
-  playerOne = new Player game, 10, 248, 'paddleOne', up: Phaser.Keyboard.Z, down: Phaser.Keyboard.S
-  playerTwo = new Player game, 766, 248, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
+  playerOne = new Player game, 25, 300, 'paddleOne', up: Phaser.Keyboard.Z, down: Phaser.Keyboard.S
+  playerTwo = new Player game, game.world.width - 25, 300, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
 
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
 
-  ballOne = new Ball game, 60, 289, 'ballOne'
-  ballTwo = new Ball game, game.world.width - 60 - 22, 289, 'ballTwo'
+  ballOne = new Ball game, 40, 300, 'ballOne'
+  ballTwo = new Ball game, game.world.width - 40, 300, 'ballTwo'
 
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]
 
 update = ->
-
   playerOne.update()
   playerTwo.update()
   ballOne.update()
   ballTwo.update()
 
   game.physics.arcade.collide balls, level.tilesGroup, level.onCollide
-  game.physics.arcade.collide balls, players
+  game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
 
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
