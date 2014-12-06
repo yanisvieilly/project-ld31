@@ -39,6 +39,8 @@ create = ->
   playerOne = new Player 10, 248, 'paddleOne', up: Phaser.Keyboard.Z, down: Phaser.Keyboard.S
   playerTwo = new Player 766, 248, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN
 
+  ballOne = new Ball 60, 289, 'ballOne'
+
 update = ->
   playerOne.update()
   playerTwo.update()
