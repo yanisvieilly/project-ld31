@@ -6,7 +6,6 @@ var uglify = require('gulp-uglify');
 gulp.task('build', function() {
   gulp.src('src/*.coffee')
     .pipe(coffee({ bare: true }).on('error', gutil.log))
-    .pipe(uglify())
     .pipe(gulp.dest('dist'))
 });
 
