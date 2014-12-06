@@ -32,6 +32,6 @@ class Player extends Phaser.Sprite
   shoot: ->
     if @weaponType > 0
       if @id == Player.LEFT
-        new Bullet game, @x + 25, @y, 'bulletLeftOne', 1, @bullets
+        @bullets.add new Bullet game, @x + 25, @y, 'bulletLeftOne', 1
       else
-        new Bullet game, @x - 25, @y, 'bulletRightOne', -1, @bullets
+        @bullets.add new Bullet game, @x - 25, @y, 'bulletRightOne', -1
