@@ -23,6 +23,8 @@ class Player extends Phaser.Sprite
 
     @cursors.shoot.onDown.add @shoot, @
 
+    @life = 100
+
   update: ->
     if @cursors.up.isDown && @y > SPEED + @height / 2
       @y -= SPEED
@@ -35,3 +37,7 @@ class Player extends Phaser.Sprite
         @bullets.add new Bullet game, @x + 25, @y, 'bulletLeftOne', 1
       else
         @bullets.add new Bullet game, @x - 25, @y, 'bulletRightOne', -1
+
+  onBulletCollide: (player, bullet) =>
+    @life -= 10
+    bullet.kill()

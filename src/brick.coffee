@@ -14,13 +14,11 @@ class Brick
         if luckyNumber < 20 #% of chances to drop an item
           droppable = Droppable.createFromType 'WEAPON'
         res =
-          score: 10
           droppable: droppable
         return res
       else
         @sprite.frame += 1
-        res =
-          score: 0
+        res = {}
         return res
 
     break: =>

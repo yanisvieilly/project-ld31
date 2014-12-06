@@ -5,8 +5,8 @@ ballOne = null
 ballTwo = null
 balls = null
 level = null
-scoreTextOne = ''
-scoreTextTwo = ''
+lifeTextOne = ''
+lifeTextTwo = ''
 level_map = [
   ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
   ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
@@ -22,7 +22,6 @@ level_map = [
   ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
   ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
   ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-
 ]
 
 # loadSprite = (id, image, size) ->
@@ -84,8 +83,8 @@ create = ->
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]
 
-  scoreTextOne = game.add.text 20, 20, "Score: #{ballOne.score}", fontSize: '32px', fill: '#FFF'
-  scoreTextTwo = game.add.text game.world.width - 135, 20, "Score: #{ballTwo.score}", fontSize: '32px', fill: '#FFF'
+  lifeTextOne = game.add.text 20, 20, "Life: #{playerOne.life}", fontSize: '32px', fill: '#FFF'
+  lifeTextTwo = game.add.text game.world.width - 135, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
 
 update = ->
   playerOne.update()
@@ -93,10 +92,13 @@ update = ->
   ballOne.update()
   ballTwo.update()
 
-  scoreTextOne.text = "Score: #{ballOne.score}"
-  scoreTextTwo.text = "Score: #{ballTwo.score}"
+  lifeTextOne.text = "Life: #{playerOne.life}"
+  lifeTextTwo.text = "Life: #{playerTwo.life}"
 
   game.physics.arcade.collide balls, level.bricksGroup, level.onCollide
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
+
+  game.physics.arcade.collide playerTwo, playerOne.bullets, playerTwo.onBulletCollide
+  game.physics.arcade.collide playerOne, playerTwo.bullets, playerOne.onBulletCollide
 
 game = new Phaser.Game window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update }
