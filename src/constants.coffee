@@ -1,1 +1,1 @@
-TILE_SIZE = width: 32, height: 64
+TILE_SIZE = width: 16, height: 32
