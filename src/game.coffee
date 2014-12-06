@@ -1,5 +1,6 @@
 playerOne = null
 playerTwo = null
+ballOne = null
 level_map = [
   ['tile_red', 'tile_red']
   ['tile_purple', 'tile_purple']
@@ -44,5 +45,7 @@ create = ->
 update = ->
   playerOne.update()
   playerTwo.update()
+
+  ballOne.update()
 
 game = new Phaser.Game 800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update }
