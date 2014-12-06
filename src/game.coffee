@@ -51,6 +51,8 @@ create = ->
   # game.physics.arcade.checkCollision.right = false
 
   background = game.add.image 0, 0, 'background'
+  background.width = game.width
+  background.height = game.height
 
   level = new Level level_map
   level.create()
