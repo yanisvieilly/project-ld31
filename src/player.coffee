@@ -27,6 +27,8 @@ class Player extends Phaser.Sprite
 
     @life = 100
 
+    @immune = false
+
     shipX = if @id is Player.LEFT then @x - 35 else @x + 35
     shipImage = if @id is Player.LEFT then 'shipOne' else 'shipTwo'
     @ship = new Ship game, shipX, @y, shipImage
@@ -62,10 +64,17 @@ class Player extends Phaser.Sprite
   description: ->
     "Player #{if @id == Player.LEFT then 'LEFT' else 'RIGHT'}"
 
+  displayWinText: ->
+    winner = if @id == Player.LEFT then 'Red' else 'Blue'
+    winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{winner} player wins!", font: 'bold 100px Arial', fill: '#FFF'
+    winningText.anchor.setTo 0.5, 0.5
+
   reduceLife: (value) ->
-    @life -= value
-    if @life <= 0
-      @life = 0
-      winner = if @id == Player.LEFT then 'Red' else 'Blue'
-      winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{winner} player wins!", font: 'bold 100px Arial', fill: '#FFF'
-      winningText.anchor.setTo 0.5, 0.5
+    unless @immune
+      @life -= value
+      if @life <= 0
+        @life = 0
+        @displayWinText()
+
+  setImmune: (value) ->
+    @immune = value

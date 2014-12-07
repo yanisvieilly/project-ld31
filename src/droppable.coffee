@@ -19,6 +19,13 @@ class Droppable extends Phaser.Sprite
         superBall: 10
         countdown: SUPERBALL_DURATION
 
+    IMMUNITY:
+      img: 'lib/assets/img/shield_silver.png'
+      spriteId: 'droppable_immunity'
+      config:
+        playerImmunity: true
+        countdown: IMMUNITY_DURATION
+
 
   # Class Helpers
 
@@ -112,6 +119,8 @@ class Droppable extends Phaser.Sprite
       receiver.setCatchBallMode true
     if @playerImmunity && receiver.setImmune
       receiver.setImmune true
+      Droppable._addTimedAction receiver, @type, @countdown, @resetCountdownOnCatch, =>
+        receiver.setImmune false
     if @superBall && receiver.ball
       receiver.ball.addSuperBallStrength @superBall
       Droppable._addTimedAction receiver, @type, @countdown, @resetCountdownOnCatch, =>
