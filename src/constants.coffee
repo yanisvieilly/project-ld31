@@ -5,6 +5,9 @@
 BRICK_SIZE =
   width: 16
   height: 32
+BALL_SIZE =
+  width: 22
+  height: 22
 BRICK_DROP_CHANCES = 70 # %
 BRICK_RESPAWN_TIME = 30
 

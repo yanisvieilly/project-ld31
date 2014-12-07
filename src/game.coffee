@@ -54,8 +54,9 @@ preload = ->
   game.load.image 'shipTwo', 'lib/assets/img/playerShip3_red.png'
 
   # Loading balls
-  game.load.image 'ballOne', 'lib/assets/img/ballGrey.png'
-  game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
+  game.load.spritesheet 'ballOne', 'lib/assets/img/ballBlue.png', BALL_SIZE.width, BALL_SIZE.height
+  game.load.spritesheet 'ballTwo', 'lib/assets/img/ballRed.png', BALL_SIZE.width, BALL_SIZE.height
+  # game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
 
   # Load droppables
   Droppable.loadAssets()

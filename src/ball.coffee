@@ -34,8 +34,10 @@ class Ball extends Phaser.Sprite
     console.log "#{@player.description()} super ball is now #{@_superBall}"
     if @_superBall > 0
       #TODO: Change ball sprite, increase speed ?
+      @frame = 1
     else
       #TODO: Restore ball sprite
+      @frame = 0
 
 
   update: ->
