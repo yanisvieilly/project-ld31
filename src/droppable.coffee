@@ -26,6 +26,20 @@ class Droppable extends Phaser.Sprite
         playerImmunity: true
         countdown: IMMUNITY_DURATION
 
+    ENLARGER:
+      img: 'lib/assets/img/droppable_enlarger.png'
+      spriteId: 'droppable_enlarger'
+      config:
+        paddleSize: Player.PaddleSize.BIG
+        countdown: ENLARGER_DURATION
+
+    REDUCER:
+      img: 'lib/assets/img/droppable_reducer.png'
+      spriteId: 'droppable_reducer'
+      config:
+        paddleSize: Player.PaddleSize.SMALL
+        countdown: REDUCER_DURATION
+
 
   # Class Helpers
 
@@ -112,6 +126,8 @@ class Droppable extends Phaser.Sprite
         receiver.addWeaponLevel -@weapon
     if @paddleSize && receiver.setPaddleSize
       receiver.setPaddleSize @paddleSize
+      Droppable._addTimedAction receiver, @type, @countdown, @resetCountdownOnCatch, =>
+        receiver.setPaddleSize Player.PaddleSize.DEFAULT
     if @life && receiver.addLife
       receiver.addLife @life
 

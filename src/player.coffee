@@ -4,8 +4,21 @@ class Player extends Phaser.Sprite
   @LEFT = 0
   @RIGHT = 1
 
-  constructor: (game, x, y, image, cursors, @id) ->
-    super game, x, y, image
+  @PaddleSize =
+    DEFAULT:  0
+    BIG:      1
+    SMALL:    2
+
+  @loadAssets: ->
+    game.load.image 'paddle_blue_default', 'lib/assets/img/paddle_blue_default.png'
+    game.load.image 'paddle_blue_big', 'lib/assets/img/paddle_blue_big.png'
+    game.load.image 'paddle_blue_small', 'lib/assets/img/paddle_blue_small.png'
+    game.load.image 'paddle_red_default', 'lib/assets/img/paddle_red_default.png'
+    game.load.image 'paddle_red_big', 'lib/assets/img/paddle_red_big.png'
+    game.load.image 'paddle_red_small', 'lib/assets/img/paddle_red_small.png'
+
+  constructor: (game, x, y, size, cursors, @id) ->
+    super game, x, y, @_getSpriteIdFromSize(size)
 
     @anchor.setTo 0.5, 0.5
 
@@ -89,3 +102,21 @@ class Player extends Phaser.Sprite
     @immune = value
     @line.setImmune value
     @shield.visible = value
+
+  setPaddleSize: (size) ->
+    console.log 'size before: ', @width, ', ', @height
+    img = @_getSpriteIdFromSize size
+    @loadTexture img
+    @body.setSize(@width, @height)
+    console.log 'size after: ', @width, ', ', @height
+
+  _getColorForId: (id) ->
+    return if id == Player.LEFT then 'blue' else 'red'
+
+  _getSpriteIdFromSize: (size) ->
+    color = @_getColorForId(@id)
+    spriteIds = {}
+    spriteIds[Player.PaddleSize.DEFAULT] = "paddle_#{color}_default"
+    spriteIds[Player.PaddleSize.BIG] = "paddle_#{color}_big"
+    spriteIds[Player.PaddleSize.SMALL] = "paddle_#{color}_small"
+    return spriteIds[size]

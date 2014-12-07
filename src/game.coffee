@@ -48,8 +48,9 @@ preload = ->
   game.load.spritesheet 'brk3_grey', 'lib/assets/img/brick_brk3_grey.png', BRICK_SIZE.width, BRICK_SIZE.height
 
   # Loading paddles
-  game.load.image 'paddleOne', 'lib/assets/img/paddleBlu_v.png'
-  game.load.image 'paddleTwo', 'lib/assets/img/paddleRed_v.png'
+  # game.load.image 'paddleOne', 'lib/assets/img/paddle_blue_default.png'
+  # game.load.image 'paddleTwo', 'lib/assets/img/paddle_red_default.png'
+  Player.loadAssets()
 
   # Loading ships
   game.load.image 'shipOne', 'lib/assets/img/playerShip1_blue.png'
@@ -74,6 +75,7 @@ preload = ->
   game.load.image 'shield', 'lib/assets/img/shield.png'
 
 create = ->
+
   game.physics.startSystem Phaser.Physics.ARCADE
   # game.physics.arcade.checkCollision.left = false
   # game.physics.arcade.checkCollision.right = false
@@ -85,8 +87,10 @@ create = ->
   level = new Level level_map
   level.create()
 
-  playerOne = new Player game, 60, START_Y, 'paddleOne', up: Phaser.Keyboard.E, down: Phaser.Keyboard.D, shoot: Phaser.Keyboard.SPACEBAR, Player.LEFT
-  playerTwo = new Player game, game.world.width - 60, START_Y, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN, shoot: Phaser.Keyboard.ENTER, Player.RIGHT
+  playerOne = new Player game, 60, START_Y, Player.PaddleSize.DEFAULT, up: Phaser.Keyboard.E, down: Phaser.Keyboard.D, shoot: Phaser.Keyboard.SPACEBAR, Player.LEFT
+  playerTwo = new Player game, game.world.width - 60, START_Y, Player.PaddleSize.DEFAULT, up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN, shoot: Phaser.Keyboard.ENTER, Player.RIGHT
+
+  playerTwo.setPaddleSize Player.PaddleSize.BIG
 
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
