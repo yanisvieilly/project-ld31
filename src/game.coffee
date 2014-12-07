@@ -63,6 +63,9 @@ preload = ->
   game.load.image 'bulletLeftOne', 'lib/assets/img/laserBlue03.png'
   game.load.image 'bulletRightOne', 'lib/assets/img/laserRed03.png'
 
+  game.load.image 'lineOne', '/lib/assets/img/blueLine.png'
+  game.load.image 'lineTwo', '/lib/assets/img/redLine.png'
+
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
   # game.physics.arcade.checkCollision.left = false
@@ -91,6 +94,12 @@ create = ->
 
   lifeTextOne = game.add.text 20, 20, "Life: #{playerOne.life}", fontSize: '32px', fill: '#FFF'
   lifeTextTwo = game.add.text game.world.width - 135, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
+
+  lineOne = game.add.sprite playerOne.x - 16, 0, 'lineOne'
+  lineOne.height = game.world.height
+
+  lineTwo = game.add.sprite playerTwo.x + 13, 0, 'lineTwo'
+  lineTwo.height = game.world.height
 
 update = ->
   playerOne.update()
