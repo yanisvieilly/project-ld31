@@ -114,8 +114,8 @@ update = ->
   game.physics.arcade.collide balls, level.bricksGroup, null, level.onBallBrickShouldCollide, level
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
 
-  game.physics.arcade.collide playerOne, playerTwo.bullets, playerOne.onBulletCollide
-  game.physics.arcade.collide playerTwo, playerOne.bullets, playerTwo.onBulletCollide
+  game.physics.arcade.collide playerOne, playerTwo.bullets, playerOne.onBulletCollide, null, playerOne
+  game.physics.arcade.collide playerTwo, playerOne.bullets, playerTwo.onBulletCollide, null, playerTwo
 
   game.physics.arcade.collide ballOne, lineOne
   game.physics.arcade.collide ballTwo, lineTwo
