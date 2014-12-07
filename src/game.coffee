@@ -139,8 +139,8 @@ update = ->
   game.physics.arcade.collide ballOne, lineOne
   game.physics.arcade.collide ballTwo, lineTwo
 
-  game.physics.arcade.overlap ballOne, lineTwo, ballOne.onLineOverlap, null, ballOne
-  game.physics.arcade.overlap ballTwo, lineOne, ballTwo.onLineOverlap, null, ballTwo
+  game.physics.arcade.collide ballOne, lineTwo, ballOne.onLineOverlap, null, ballOne
+  game.physics.arcade.collide ballTwo, lineOne, ballTwo.onLineOverlap, null, ballTwo
 
   # game.physics.arcade.overlap playerOne, level.droppablesGroup, level.onPlayerDroppableOverlap
   # game.physics.arcade.overlap playerTwo, level.droppablesGroup, level.onPlayerDroppableOverlap

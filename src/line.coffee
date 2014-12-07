@@ -9,6 +9,8 @@ class Line extends Phaser.Sprite
 
     @immune = false
 
+  getImmune: -> @immune
+
   setImmune: (value) ->
     @immune = value
     if @immune
