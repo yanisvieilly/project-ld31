@@ -35,17 +35,16 @@ class Level
     #   d = Droppable.createFromType 'WEAPON', game
     #   @_addDroppable 400, game.height / 2.0, d, -1
 
-
-
-  onBallBrickCollide: (ball, brickSprite) =>
+  onBallBrickShouldCollide: (ball, brickSprite) ->
     brick = @bricks[brickSprite.name]
     res = brick.onBallCollide(ball, game)
-
     if res.droppable
       x = brick.sprite.x
       y = brick.sprite.y + brick.sprite.height / 2.0 - res.droppable.height / 2.0
       direction = if ball.player.id == Player.RIGHT then 1 else -1
       @_addDroppable x, y, res.droppable, direction
+
+    return !ball.hasSuperBall()
 
   onPlayerDroppableOverlap: (player, droppable) ->
     droppable.onCatchBy player

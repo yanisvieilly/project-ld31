@@ -37,6 +37,9 @@ class Ball extends Phaser.Sprite
   takeDamage: (damage) ->
     @addSuperBallStrength(-damage)
 
+  hasSuperBall: ->
+    @_superBall > 0
+
   addSuperBallStrength: (strength) ->
     @_superBall = CLAMP(@_superBall + strength, 0, SUPERBALL_MAX_STRENGTH)
     console.log "#{@player.description()} super ball is now #{@_superBall}"

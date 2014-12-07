@@ -10,20 +10,20 @@ lifeTextTwo = ''
 lineOne = null
 lineTwo = null
 level_map = [
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
   ['brick_blue', 'brick_red']
   ['brick_blue', 'brick_purple']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
   ['brick_blue', 'brick_red']
   ['brick_blue', 'brick_purple']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
-  ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
 ]
 
 # loadSprite = (id, image, size) ->
@@ -111,7 +111,7 @@ update = ->
   lifeTextOne.text = "Life: #{playerOne.life}"
   lifeTextTwo.text = "Life: #{playerTwo.life}"
 
-  game.physics.arcade.collide balls, level.bricksGroup, level.onBallBrickCollide
+  game.physics.arcade.collide balls, level.bricksGroup, null, level.onBallBrickShouldCollide, level
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
 
   game.physics.arcade.collide playerOne, playerTwo.bullets, playerOne.onBulletCollide
