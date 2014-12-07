@@ -25,11 +25,18 @@ class Player extends Phaser.Sprite
 
     @life = 100
 
+    shipX = if @id is Player.LEFT then @x - 35 else @x + 35
+    shipImage = if @id is Player.LEFT then 'shipOne' else 'shipTwo'
+    @ship = new Ship game, shipX, @y, shipImage
+    game.world.add @ship
+
   update: ->
     if @cursors.up.isDown && @y > SPEED + @height / 2
       @y -= SPEED
+      @ship.y -= SPEED
     if @cursors.down.isDown && @y < game.world.height - @height / 2 - SPEED
       @y += SPEED
+      @ship.y += SPEED
 
   addWeaponLevel: (lvl) ->
     @_weaponLevel = CLAMP(@_weaponLevel + lvl, 0, WEAPON_MAX_LVL)

@@ -49,6 +49,10 @@ preload = ->
   game.load.image 'paddleOne', 'lib/assets/img/paddleBlu_v.png'
   game.load.image 'paddleTwo', 'lib/assets/img/paddleRed_v.png'
 
+  # Loading ships
+  game.load.image 'shipOne', 'lib/assets/img/playerShip1_blue.png'
+  game.load.image 'shipTwo', 'lib/assets/img/playerShip3_red.png'
+
   # Loading balls
   game.load.image 'ballOne', 'lib/assets/img/ballGrey.png'
   game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
