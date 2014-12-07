@@ -25,7 +25,7 @@ class Ball extends Phaser.Sprite
       @body.velocity.y = game.rnd.integerInRange -1, 1
 
   onLineOverlap: (ball, line) ->
-    line.player.life -= LIVES_LOST_WITH_LINES
+    line.player.reduceLife LIVES_LOST_WITH_LINES
     ball.respawn()
 
   launch: ->
