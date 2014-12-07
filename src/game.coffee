@@ -95,12 +95,12 @@ create = ->
   level = new Level level_map
   level.create()
 
-  playerOne = new Player game, 60, START_Y, Player.PaddleSize.DEFAULT,
+  playerOne = new Player game, 60, game.world.height / 2, Player.PaddleSize.DEFAULT,
     up: Phaser.Keyboard.E
     down: Phaser.Keyboard.D
     shoot: Phaser.Keyboard.SPACEBAR,
     Player.LEFT
-  playerTwo = new Player game, game.world.width - 60, START_Y, Player.PaddleSize.DEFAULT,
+  playerTwo = new Player game, game.world.width - 60, game.world.height / 2, Player.PaddleSize.DEFAULT,
     up: Phaser.Keyboard.UP
     down: Phaser.Keyboard.DOWN
     shoot: Phaser.Keyboard.ENTER,
@@ -109,8 +109,8 @@ create = ->
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
 
-  ballOne = new Ball game, playerOne.x + 25, START_Y, 'ballOne', playerOne
-  ballTwo = new Ball game, playerTwo.x - 25, START_Y, 'ballTwo', playerTwo
+  ballOne = new Ball game, playerOne.x + 25, game.world.height / 2, 'ballOne', playerOne
+  ballTwo = new Ball game, playerTwo.x - 25, game.world.height / 2, 'ballTwo', playerTwo
   playerOne.ball = ballOne
   playerTwo.ball = ballTwo
 
