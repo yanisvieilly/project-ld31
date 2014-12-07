@@ -56,7 +56,7 @@ class Droppable extends Phaser.Sprite
     if @weapon && receiver.addWeaponLevel
       receiver.addWeaponLevel @weapon
     if @paddleSize && receiver.setPaddleSize
-      receiver.weapon @paddleSize
+      receiver.setPaddleSize @paddleSize
     if @life && receiver.addLife
       receiver.addLife @life
     if @catchesBall && receiver.setCatchBallMode
