@@ -12,6 +12,9 @@ class Ball extends Phaser.Sprite
 
     @score = 0
 
+    @_strength = 1
+    @_superBall = 0
+
   onPlayerCollide: (player) ->
     if @y < player.y
       @body.velocity.y = (player.y - @y) * -3
@@ -19,5 +22,20 @@ class Ball extends Phaser.Sprite
       @body.velocity.y = (@y - player.y) * 3
     else
       @body.velocity.y = game.rnd.integerInRange -1, 1
+
+  getStrength: ->
+    return @_strength + @_superBall
+
+  takeDamage: (damage) ->
+    @addSuperBallStrength(-damage)
+
+  addSuperBallStrength: (strength) ->
+    @_superBall = CLAMP(@_superBall + strength, 0, SUPERBALL_MAX_STRENGTH)
+    console.log "#{@player.description()} super ball is now #{@_superBall}"
+    if @_superBall > 0
+      #TODO: Change ball sprite, increase speed ?
+    else
+      #TODO: Restore ball sprite
+
 
   update: ->

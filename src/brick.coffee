@@ -12,7 +12,8 @@ class Brick
         droppable = null
         luckyNumber = game.rnd.integerInRange 0, 100
         if luckyNumber < BRICK_DROP_CHANCES #% of chances to drop an item
-          droppable = Droppable.createFromType 'WEAPON', game
+          type = Droppable.getRandomType()
+          droppable = Droppable.createFromType type, game
         res =
           droppable: droppable
         return res

@@ -1,13 +1,26 @@
 class Droppable extends Phaser.Sprite
 
+
+  # Droppable items config
+
   @types:
+
     WEAPON:
       img: 'lib/assets/img/droppable_weapon.png'
       spriteId: 'droppable_weapon'
       config:
         weapon: 1
         countdown: WEAPON_DURATION
-        resetCountdownOnCatch: false
+
+    SUPERBALL:
+      img: 'lib/assets/img/droppable_superball.png'
+      spriteId: 'droppable_superball'
+      config:
+        superBall: 10
+        countdown: SUPERBALL_DURATION
+
+
+  # Class Helpers
 
   @_timers = {}
 
@@ -32,13 +45,20 @@ class Droppable extends Phaser.Sprite
 
   @_endTimer: (receiver, type) ->
     return if !Droppable._timers[receiver.id] || !Droppable._timers[receiver.id][type]
-    console.log "End of #{type} for #{receiver.description()}(#{receiver.id}), timers: ", Droppable._timers
     timer = Droppable._timers[receiver.id][type]
     for endEvent in timer.endEvents
       endEvent()
     delete Droppable._timers[receiver.id][type]
-    delete Droppable._timers[receiver.id] if !Droppable._timers[receiver.id].length
-    console.log 'timers: ', Droppable._timers
+    delete Droppable._timers[receiver.id] if !Object.keys(Droppable._timers[receiver.id]).length
+    # console.log "End of #{type} for #{receiver.description()}(#{receiver.id}), timers: ", Droppable._timers
+
+  @getRandomType: ->
+    types = Object.keys(Droppable.types)
+    idx = game.rnd.integerInRange 0, types.length - 1
+    return types[idx]
+
+
+  # Initialization
 
   @loadAssets: ->
     for key, droppableInfo of @types
@@ -65,16 +85,20 @@ class Droppable extends Phaser.Sprite
     @weapon = config.weapon || 0 #Increases or decreases weapon level
     @paddleSize = config.paddleSize || 0 #Increases or decreases paddle size
     @life = config.life || 0 #Amount of life given to receiver
+    @superBall = config.superBall || 0 #Amount of super ball strength given to receiver's ball
     # @addedBricks = config.addedBricks || 0 #Amount of bricks added to the game board
 
     @catchesBall = config.catchesBall || false #If true, ball will stick to paddle until gamer throw it manually
     @playerImmunity = config.playerImmunity || false #If true, player no longer receives damages when hitting the enemy's ball
-    @superBall = config.superBall || false #If true, receiver's ball will go through the bricks after breaking them
 
     @ballColor = config.ballColor || null #If set to a brick color, receiver's ball will only break those bricks for a given amount of time
 
+
+  # Events
+
   onCatchBy: (receiver) =>
-    cancelActions = []
+
+    console.log "#{@type} caught by #{receiver.description()}"
     if @weapon && receiver.addWeaponLevel
       receiver.addWeaponLevel @weapon
       Droppable._addTimedAction receiver, @type, @countdown, @resetCountdownOnCatch, =>
@@ -88,7 +112,9 @@ class Droppable extends Phaser.Sprite
       receiver.setCatchBallMode true
     if @playerImmunity && receiver.setImmune
       receiver.setImmune true
-    if @superBall && receiver.setSuperBall
-      receiver.setSuperBall true
+    if @superBall && receiver.ball
+      receiver.ball.addSuperBallStrength @superBall
+      Droppable._addTimedAction receiver, @type, @countdown, @resetCountdownOnCatch, =>
+        receiver.ball.addSuperBallStrength -@superBall
     if @ballColor && receiver.setBallColor
       receiver.setBallColor @ballColor

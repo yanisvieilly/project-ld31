@@ -9,6 +9,8 @@ class Player extends Phaser.Sprite
 
     @anchor.setTo 0.5, 0.5
 
+    @ball = null
+
     @cursors =
       up: game.input.keyboard.addKey cursors.up
       down: game.input.keyboard.addKey cursors.down
