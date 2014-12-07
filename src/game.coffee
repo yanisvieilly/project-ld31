@@ -36,7 +36,7 @@ level_map = [
 
 preload = ->
   # Load background
-  game.load.image 'background', 'lib/assets/img/background.jpg'
+  game.load.image 'background', 'lib/assets/img/background.png'
 
   # Loading bricks
   game.load.image 'brick_blue', 'lib/assets/img/element_blue_rectangle_v.png'
@@ -80,15 +80,25 @@ create = ->
   # game.physics.arcade.checkCollision.left = false
   # game.physics.arcade.checkCollision.right = false
 
-  background = game.add.image 0, 0, 'background'
-  background.width = game.width
-  background.height = game.height
+  # background = game.add.image 0, 0, 'background'
+  # background = new Phaser.TileSprite
+  # background.width = game.width
+  # background.height = game.height
+  background = game.add.tileSprite 0, 0, game.width, game.height, 'background'
 
   level = new Level level_map
   level.create()
 
-  playerOne = new Player game, 60, START_Y, Player.PaddleSize.DEFAULT, up: Phaser.Keyboard.E, down: Phaser.Keyboard.D, shoot: Phaser.Keyboard.SPACEBAR, Player.LEFT
-  playerTwo = new Player game, game.world.width - 60, START_Y, Player.PaddleSize.DEFAULT, up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN, shoot: Phaser.Keyboard.ENTER, Player.RIGHT
+  playerOne = new Player game, 60, START_Y, Player.PaddleSize.DEFAULT,
+    up: Phaser.Keyboard.E
+    down: Phaser.Keyboard.D
+    shoot: Phaser.Keyboard.SPACEBAR,
+    Player.LEFT
+  playerTwo = new Player game, game.world.width - 60, START_Y, Player.PaddleSize.DEFAULT,
+    up: Phaser.Keyboard.UP
+    down: Phaser.Keyboard.DOWN
+    shoot: Phaser.Keyboard.ENTER,
+    Player.RIGHT
 
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
