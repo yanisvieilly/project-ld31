@@ -6,3 +6,12 @@ class Line extends Phaser.Sprite
 
     game.physics.arcade.enable @
     @body.immovable = true
+
+    @immune = false
+
+  setImmune: (value) ->
+    @immune = value
+    if @immune
+      @loadTexture if @player.id is Player.LEFT then 'lineOneImmune' else 'lineTwoImmune'
+    else
+      @loadTexture if @player.id is Player.LEFT then 'lineOne' else 'lineTwo'

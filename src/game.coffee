@@ -68,6 +68,9 @@ preload = ->
   game.load.image 'lineOne', 'lib/assets/img/blueLine.png'
   game.load.image 'lineTwo', 'lib/assets/img/redLine.png'
 
+  game.load.image 'lineOneImmune', 'lib/assets/img/blueLineImmune.png'
+  game.load.image 'lineTwoImmune', 'lib/assets/img/redLineImmune.png'
+
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
   # game.physics.arcade.checkCollision.left = false
@@ -98,7 +101,9 @@ create = ->
   lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
 
   lineOne = new Line game, playerOne.x - 16, 0, 'lineOne', playerOne
+  playerOne.line = lineOne
   lineTwo = new Line game, playerTwo.x + 13, 0, 'lineTwo', playerTwo
+  playerTwo.line = lineTwo
   lines = game.add.group()
   lines.addMultiple [lineOne, lineTwo]
 

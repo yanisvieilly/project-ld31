@@ -10,6 +10,7 @@ class Player extends Phaser.Sprite
     @anchor.setTo 0.5, 0.5
 
     @ball = null
+    @line = null
 
     @cursors =
       up: game.input.keyboard.addKey cursors.up
@@ -78,3 +79,4 @@ class Player extends Phaser.Sprite
 
   setImmune: (value) ->
     @immune = value
+    @line.setImmune value
