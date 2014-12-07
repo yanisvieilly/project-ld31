@@ -23,3 +23,5 @@ class Brick
 
     break: =>
       @sprite.kill()
+      TIMER_START BRICK_RESPAWN_TIME, =>
+        @sprite.revive()
