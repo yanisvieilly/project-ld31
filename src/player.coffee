@@ -35,14 +35,22 @@ class Player extends Phaser.Sprite
     @ship = new Ship game, shipX, @y, shipImage
     game.world.add @ship
 
+    @shield = game.add.image @ship.x, @ship.y, 'shield'
+    @shield.anchor.setTo 0.5, 0.5
+    @shield.scale.setTo 0.5, 0.5
+    @shield.rotation = Math.PI if @id is Player.RIGHT
+    @shield.visible = false
+
   update: ->
     if @cursors.up.isDown && @y > SPEED + @height / 2
       @y -= SPEED
       @ship.y -= SPEED
+      @shield.y -= SPEED
       @ball.y -= SPEED if @ball.stopped()
     if @cursors.down.isDown && @y < game.world.height - @height / 2 - SPEED
       @y += SPEED
       @ship.y += SPEED
+      @shield.y += SPEED
       @ball.y += SPEED if @ball.stopped()
 
   addWeaponLevel: (lvl) ->
@@ -80,3 +88,4 @@ class Player extends Phaser.Sprite
   setImmune: (value) ->
     @immune = value
     @line.setImmune value
+    @shield.visible = value

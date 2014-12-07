@@ -71,6 +71,8 @@ preload = ->
   game.load.image 'lineOneImmune', 'lib/assets/img/blueLineImmune.png'
   game.load.image 'lineTwoImmune', 'lib/assets/img/redLineImmune.png'
 
+  game.load.image 'shield', 'lib/assets/img/shield.png'
+
 create = ->
   game.physics.startSystem Phaser.Physics.ARCADE
   # game.physics.arcade.checkCollision.left = false
