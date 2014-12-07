@@ -1,7 +1,6 @@
 class Level
   constructor: (levelMap) ->
     @levelMap = levelMap
-
     @droppablesGroup = game.add.group()
 
   create: ->
@@ -25,19 +24,44 @@ class Level
         x += BRICK_SIZE.width
         idx++
 
-  onCollide: (ball, brickSprite) =>
-    brick = @bricks[brickSprite.name]
-    res = brick.onBallCollide(ball)
-    @_addDroppable res.droppable, brick, ball if res.droppable
+    ### FAKE DATA FOR TESTS ###
+    # for i in [0..0]
+    #   d = Droppable.createFromType 'WEAPON', game
+    #   @_addDroppable 400, game.height / 2.0, d, -1
+    #
+    # # console.log 'start timer'
+    # TIMER_START 3, =>
+    #   d = Droppable.createFromType 'WEAPON', game
+    #   @_addDroppable 400, game.height / 2.0, d, -1
 
-  _addDroppable: (droppable, brick, ball) ->
-    drop = @droppablesGroup.create 0, 0, droppable.spriteId
+
+
+  onBallBrickCollide: (ball, brickSprite) =>
+    brick = @bricks[brickSprite.name]
+    res = brick.onBallCollide(ball, game)
+
+    if res.droppable
+      x = brick.sprite.x
+      y = brick.sprite.y + brick.sprite.height / 2.0 - res.droppable.height / 2.0
+      direction = if ball.player.id == Player.RIGHT then 1 else -1
+      @_addDroppable x, y, res.droppable, direction
+
+  onPlayerDroppableOverlap: (player, droppable) ->
+    droppable.onCatchBy player
+    droppable.kill()
+
+  _addDroppable: (x, y, drop, direction) ->
+    @droppablesGroup.add drop
+    drop.x = x
+    drop.y = y
     game.physics.arcade.enable drop
-    drop.x = brick.sprite.x
-    drop.y = brick.sprite.y + brick.sprite.height / 2.0 - drop.height / 2.0
-    direction = if ball.player.id == Player.RIGHT then 1 else -1
+
+    velocity = game.rnd.integerInRange DROPPABLE_MIN_SPEED, DROPPABLE_MAX_SPEED
+    spread = DROPPABLE_SPREAD_RADIUS * velocity
+    vy = game.rnd.integerInRange(-spread, spread)
+    vx = velocity - Math.abs(vy)
     drop.body.velocity =
-      x: game.rnd.integerInRange 200, 300 * direction
-      y: game.rnd.integerInRange -100, 100
+      x: vx * direction
+      y: vy
     drop.body.bounce = x: 1, y: 1
     drop.body.collideWorldBounds = true
