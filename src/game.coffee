@@ -7,6 +7,8 @@ balls = null
 level = null
 lifeTextOne = ''
 lifeTextTwo = ''
+lineOne = null
+lineTwo = null
 level_map = [
   ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
   ['brick_blue', 'brick_blue', 'void', 'brick_blue', 'brick_blue']
@@ -54,8 +56,8 @@ preload = ->
   game.load.image 'shipTwo', 'lib/assets/img/playerShip3_red.png'
 
   # Loading balls
-  game.load.image 'ballOne', 'lib/assets/img/ballGrey.png'
-  game.load.image 'ballTwo', 'lib/assets/img/ballBlue.png'
+  game.load.image 'ballOne', 'lib/assets/img/ballBlue.png'
+  game.load.image 'ballTwo', 'lib/assets/img/ballGrey.png'
 
   # Load droppables
   Droppable.loadAssets()
@@ -95,11 +97,10 @@ create = ->
   lifeTextOne = game.add.text 80, 20, "Life: #{playerOne.life}", fontSize: '32px', fill: '#FFF'
   lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
 
-  lineOne = game.add.sprite playerOne.x - 16, 0, 'lineOne'
-  lineOne.height = game.world.height
-
-  lineTwo = game.add.sprite playerTwo.x + 13, 0, 'lineTwo'
-  lineTwo.height = game.world.height
+  lineOne = new Line game, playerOne.x - 16, 0, 'lineOne'
+  lineTwo = new Line game, playerTwo.x + 13, 0, 'lineTwo'
+  lines = game.add.group()
+  lines.addMultiple [lineOne, lineTwo]
 
 update = ->
   playerOne.update()
@@ -115,6 +116,9 @@ update = ->
 
   game.physics.arcade.collide playerOne, playerTwo.bullets, playerOne.onBulletCollide
   game.physics.arcade.collide playerTwo, playerOne.bullets, playerTwo.onBulletCollide
+
+  game.physics.arcade.collide ballOne, lineOne
+  game.physics.arcade.collide ballTwo, lineTwo
 
   # game.physics.arcade.overlap playerOne, level.droppablesGroup, level.onPlayerDroppableOverlap
   # game.physics.arcade.overlap playerTwo, level.droppablesGroup, level.onPlayerDroppableOverlap
