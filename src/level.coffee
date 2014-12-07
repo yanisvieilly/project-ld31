@@ -26,6 +26,7 @@ class Level
 
     ### FAKE DATA FOR TESTS ###
     # for i in [0..0]
+    #   console.log 'drop'
     #   d = Droppable.createFromType 'WEAPON', game
     #   @_addDroppable 400, game.height / 2.0, d, -1
     #

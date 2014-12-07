@@ -11,13 +11,34 @@ class Droppable extends Phaser.Sprite
 
   @_timers = {}
 
-  @_getTimer: (receiver, type) ->
-    return Droppable._timers[receiver][type] if Droppable._timers[receiver]
-    return null
+  @_getOrCreateTimer: (receiver, type, duration, reset) ->
+    Droppable._timers[receiver.id] = {} if !Droppable._timers[receiver.id]
+    timer = Droppable._timers[receiver.id][type]
+    if timer && reset
+      TIMER_STOP timer.event
+      timer = null
+    if !timer
+      timer =
+        endEvents: []
+        event: TIMER_START duration, =>
+          @_endTimer receiver, type
+    !Droppable._timers[receiver.id][type] = timer
+    return timer
 
-  @_setTimer: (receiver, type, timer) ->
-    Droppable._timers[receiver] = {} if !Droppable._timers[receiver]
-    Droppable._timers[receiver][type] = timer
+  @_addTimedAction: (receiver, type, duration, reset, func) ->
+    return if !duration
+    timer = @_getOrCreateTimer receiver, type, duration, reset
+    timer.endEvents.push func
+
+  @_endTimer: (receiver, type) ->
+    return if !Droppable._timers[receiver.id] || !Droppable._timers[receiver.id][type]
+    console.log "End of #{type} for #{receiver.description()}(#{receiver.id}), timers: ", Droppable._timers
+    timer = Droppable._timers[receiver.id][type]
+    for endEvent in timer.endEvents
+      endEvent()
+    delete Droppable._timers[receiver.id][type]
+    delete Droppable._timers[receiver.id] if !Droppable._timers[receiver.id].length
+    console.log 'timers: ', Droppable._timers
 
   @loadAssets: ->
     for key, droppableInfo of @types
@@ -53,12 +74,16 @@ class Droppable extends Phaser.Sprite
     @ballColor = config.ballColor || null #If set to a brick color, receiver's ball will only break those bricks for a given amount of time
 
   onCatchBy: (receiver) =>
+    cancelActions = []
     if @weapon && receiver.addWeaponLevel
       receiver.addWeaponLevel @weapon
+      Droppable._addTimedAction receiver, @type, @countdown, @resetCountdownOnCatch, =>
+        receiver.addWeaponLevel -@weapon
     if @paddleSize && receiver.setPaddleSize
       receiver.setPaddleSize @paddleSize
     if @life && receiver.addLife
       receiver.addLife @life
+
     if @catchesBall && receiver.setCatchBallMode
       receiver.setCatchBallMode true
     if @playerImmunity && receiver.setImmune
@@ -67,12 +92,3 @@ class Droppable extends Phaser.Sprite
       receiver.setSuperBall true
     if @ballColor && receiver.setBallColor
       receiver.setBallColor @ballColor
-
-    if @countdown
-      timer = Droppable._getTimer receiver, @type
-      return if timer && !@resetCountdownOnCatch
-
-      TIMER_STOP timer
-      timer = TIMER_START @countdown, =>
-        console.log("End of #{@type} for #{receiver.description()}")
-      Droppable._setTimer receiver, @type, timer
