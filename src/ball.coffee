@@ -6,7 +6,7 @@ class Ball extends Phaser.Sprite
     @anchor.setTo 0.5, 0.5
 
     game.physics.arcade.enable @
-    @body.velocity = x: 300, y: game.rnd.integerInRange -100, 100
+    @body.velocity = x: BALL_DEFAULT_SPEED, y: game.rnd.integerInRange -100, 100
     @body.bounce = x: 1, y: 1
     @body.collideWorldBounds = true
 
