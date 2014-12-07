@@ -5,8 +5,9 @@ class Ball extends Phaser.Sprite
     @player = player
     @anchor.setTo 0.5, 0.5
 
+    @_stoppedState = true
+
     game.physics.arcade.enable @
-    @body.velocity = x: BALL_DEFAULT_SPEED, y: game.rnd.integerInRange -100, 100
     @body.bounce = x: 1, y: 1
     @body.collideWorldBounds = true
 
@@ -23,6 +24,13 @@ class Ball extends Phaser.Sprite
     else
       @body.velocity.y = game.rnd.integerInRange -1, 1
 
+  launch: ->
+    @body.velocity = x: BALL_DEFAULT_SPEED, y: game.rnd.integerInRange -100, 100
+    @_stoppedState = false
+
+  stopped: ->
+    @_stoppedState
+
   getStrength: ->
     return @_strength + @_superBall
 
@@ -38,6 +46,5 @@ class Ball extends Phaser.Sprite
     else
       #TODO: Restore ball sprite
       @frame = 0
-
 
   update: ->

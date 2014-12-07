@@ -36,9 +36,11 @@ class Player extends Phaser.Sprite
     if @cursors.up.isDown && @y > SPEED + @height / 2
       @y -= SPEED
       @ship.y -= SPEED
+      @ball.y -= SPEED if @ball.stopped()
     if @cursors.down.isDown && @y < game.world.height - @height / 2 - SPEED
       @y += SPEED
       @ship.y += SPEED
+      @ball.y += SPEED if @ball.stopped()
 
   addWeaponLevel: (lvl) ->
     @_weaponLevel = CLAMP(@_weaponLevel + lvl, 0, WEAPON_MAX_LVL)
@@ -51,6 +53,7 @@ class Player extends Phaser.Sprite
         @bullets.add new Bullet game, @x + 25, @y, 'bulletLeftOne', 1
       else
         @bullets.add new Bullet game, @x - 25, @y, 'bulletRightOne', -1
+    @ball.launch() if @ball.stopped()
 
   onBulletCollide: (player, bullet) =>
     @life -= 10
