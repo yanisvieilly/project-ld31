@@ -134,4 +134,7 @@ update = ->
   # game.physics.arcade.overlap playerTwo, level.droppablesGroup, level.onPlayerDroppableOverlap
   game.physics.arcade.overlap players, level.droppablesGroup, level.onPlayerDroppableOverlap
 
+  game.physics.arcade.overlap playerOne.ship, level.droppablesGroup, (ship, droppable) -> level.onPlayerDroppableOverlap ship.player, droppable
+  game.physics.arcade.overlap playerTwo.ship, level.droppablesGroup, (ship, droppable) -> level.onPlayerDroppableOverlap ship.player, droppable
+
 game = new Phaser.Game window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update }

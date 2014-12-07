@@ -32,7 +32,7 @@ class Player extends Phaser.Sprite
 
     shipX = if @id is Player.LEFT then @x - 35 else @x + 35
     shipImage = if @id is Player.LEFT then 'shipOne' else 'shipTwo'
-    @ship = new Ship game, shipX, @y, shipImage
+    @ship = new Ship game, shipX, @y, shipImage, @
     game.world.add @ship
 
     @shield = game.add.image @ship.x, @ship.y, 'shield'
