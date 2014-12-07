@@ -40,6 +40,13 @@ class Droppable extends Phaser.Sprite
         paddleSize: Player.PaddleSize.SMALL
         countdown: REDUCER_DURATION
 
+    MEDKIT:
+      img: 'lib/assets/img/droppable_medkit.png'
+      spriteId: 'droppable_medkit'
+      config:
+        health: MEDKIT_HEALTH
+
+
 
   # Class Helpers
 
@@ -105,7 +112,7 @@ class Droppable extends Phaser.Sprite
 
     @weapon = config.weapon || 0 #Increases or decreases weapon level
     @paddleSize = config.paddleSize || 0 #Increases or decreases paddle size
-    @life = config.life || 0 #Amount of life given to receiver
+    @health = config.health || 0 #Amount of health given to receiver
     @superBall = config.superBall || 0 #Amount of super ball strength given to receiver's ball
     # @addedBricks = config.addedBricks || 0 #Amount of bricks added to the game board
 
@@ -128,8 +135,8 @@ class Droppable extends Phaser.Sprite
       receiver.setPaddleSize @paddleSize
       Droppable._addTimedAction receiver, @type, @countdown, @resetCountdownOnCatch, =>
         receiver.setPaddleSize Player.PaddleSize.DEFAULT
-    if @life && receiver.addLife
-      receiver.addLife @life
+    if @health && receiver.addHealth
+      receiver.addHealth @health
 
     if @catchesBall && receiver.setCatchBallMode
       receiver.setCatchBallMode true

@@ -26,7 +26,7 @@ class Ball extends Phaser.Sprite
 
   onLineOverlap: (ball, line) ->
     unless line.getImmune()
-      line.player.reduceLife LIVES_LOST_WITH_LINES
+      line.player.reduceHealth LIVES_LOST_WITH_LINES
       ball.respawn()
 
   launch: ->

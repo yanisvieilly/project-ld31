@@ -39,7 +39,7 @@ class Player extends Phaser.Sprite
 
     @cursors.shoot.onDown.add @shoot, @
 
-    @life = 100
+    @health = 100
 
     @immune = false
 
@@ -80,7 +80,7 @@ class Player extends Phaser.Sprite
     @ball.launch() if @ball.stopped()
 
   onBulletCollide: (player, bullet) ->
-    player.reduceLife LIVES_LOST_WITH_BULLETS
+    player.reduceHealth LIVES_LOST_WITH_BULLETS
     bullet.kill()
 
   description: ->
@@ -91,12 +91,15 @@ class Player extends Phaser.Sprite
     winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{winner} player wins!", font: 'bold 100px Arial', fill: '#FFF'
     winningText.anchor.setTo 0.5, 0.5
 
-  reduceLife: (value) ->
+  reduceHealth: (value) ->
     unless @immune
-      @life -= value
-      if @life <= 0
-        @life = 0
+      @health -= value
+      if @health <= 0
+        @health = 0
         @displayWinText()
+
+  addHealth: (value) ->
+    @health = Math.min(@health + value, 100)
 
   setImmune: (value) ->
     @immune = value

@@ -24,6 +24,12 @@ level_map = [
   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brick_red']
+  ['brick_blue', 'brick_purple']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+  ['brick_blue', 'brick_red']
+  ['brick_blue', 'brick_purple']
 ]
 
 # loadSprite = (id, image, size) ->
@@ -111,8 +117,8 @@ create = ->
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]
 
-  lifeTextOne = game.add.text 80, 20, "Life: #{playerOne.life}", fontSize: '32px', fill: '#FFF'
-  lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
+  lifeTextOne = game.add.text 80, 20, "Life: #{playerOne.health}", fontSize: '32px', fill: '#FFF'
+  lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.health}", fontSize: '32px', fill: '#FFF'
 
   lineOne = new Line game, playerOne.x - 16, 0, 'lineOne', playerOne
   playerOne.line = lineOne
@@ -127,8 +133,8 @@ update = ->
   ballOne.update()
   ballTwo.update()
 
-  lifeTextOne.text = "Life: #{playerOne.life}"
-  lifeTextTwo.text = "Life: #{playerTwo.life}"
+  lifeTextOne.text = "Life: #{playerOne.health}"
+  lifeTextTwo.text = "Life: #{playerTwo.health}"
 
   game.physics.arcade.collide balls, level.bricksGroup, null, level.onBallBrickShouldCollide, level
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
