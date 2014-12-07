@@ -121,9 +121,14 @@ create = ->
   lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.health}", fontSize: '32px', fill: '#FFF'
 
   lineOne = new Line game, playerOne.x - 16, 0, 'lineOne', playerOne
+  lineOne.body.width = playerOne.x - 13
+  lineOne.body.setSize lineOne.body.width, lineOne.body.height, -lineOne.x
   playerOne.line = lineOne
+
   lineTwo = new Line game, playerTwo.x + 13, 0, 'lineTwo', playerTwo
+  lineTwo.body.width = playerTwo.x + 16
   playerTwo.line = lineTwo
+
   lines = game.add.group()
   lines.addMultiple [lineOne, lineTwo]
 
