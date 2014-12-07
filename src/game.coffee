@@ -92,8 +92,8 @@ create = ->
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]
 
-  lifeTextOne = game.add.text 20, 20, "Life: #{playerOne.life}", fontSize: '32px', fill: '#FFF'
-  lifeTextTwo = game.add.text game.world.width - 135, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
+  lifeTextOne = game.add.text 80, 20, "Life: #{playerOne.life}", fontSize: '32px', fill: '#FFF'
+  lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
 
   lineOne = game.add.sprite playerOne.x - 16, 0, 'lineOne'
   lineOne.height = game.world.height
