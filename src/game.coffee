@@ -95,10 +95,14 @@ update = ->
   lifeTextOne.text = "Life: #{playerOne.life}"
   lifeTextTwo.text = "Life: #{playerTwo.life}"
 
-  game.physics.arcade.collide balls, level.bricksGroup, level.onCollide
+  game.physics.arcade.collide balls, level.bricksGroup, level.onBallBrickCollide
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
 
-  game.physics.arcade.collide playerTwo, playerOne.bullets, playerTwo.onBulletCollide
   game.physics.arcade.collide playerOne, playerTwo.bullets, playerOne.onBulletCollide
+  game.physics.arcade.collide playerTwo, playerOne.bullets, playerTwo.onBulletCollide
+
+  # game.physics.arcade.overlap playerOne, level.droppablesGroup, level.onPlayerDroppableOverlap
+  # game.physics.arcade.overlap playerTwo, level.droppablesGroup, level.onPlayerDroppableOverlap
+  game.physics.arcade.overlap players, level.droppablesGroup, level.onPlayerDroppableOverlap
 
 game = new Phaser.Game window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update }

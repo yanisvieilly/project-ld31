@@ -5,14 +5,14 @@ class Brick
       @breakSequence = [@break]
       @breakCount = 0
 
-    onBallCollide: (ball) ->
+    onBallCollide: (ball, game) ->
       if @sprite.animations.frame == @sprite.animations.frameTotal - 1
         @break()
 
         droppable = null
         luckyNumber = game.rnd.integerInRange 0, 100
-        if luckyNumber < 20 #% of chances to drop an item
-          droppable = Droppable.createFromType 'WEAPON'
+        if luckyNumber < BRICK_DROP_CHANCES #% of chances to drop an item
+          droppable = Droppable.createFromType 'WEAPON', game
         res =
           droppable: droppable
         return res
