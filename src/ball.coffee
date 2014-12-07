@@ -1,6 +1,6 @@
 class Ball extends Phaser.Sprite
-  constructor: (game, x, y, image, player) ->
-    super game, x, y, image
+  constructor: (game, @startX, y, image, player) ->
+    super game, @startX, y, image
 
     @player = player
     @anchor.setTo 0.5, 0.5
@@ -24,12 +24,22 @@ class Ball extends Phaser.Sprite
     else
       @body.velocity.y = game.rnd.integerInRange -1, 1
 
+  onLineOverlap: (ball, line) ->
+    line.player.life -= LIVES_LOST_WITH_LINES
+    ball.respawn()
+
   launch: ->
     @body.velocity = x: BALL_DEFAULT_SPEED, y: game.rnd.integerInRange -100, 100
     @_stoppedState = false
 
   stopped: ->
     @_stoppedState
+
+  respawn: ->
+    @_stoppedState = true
+    @body.velocity = x: 0, y: 0
+    @x = @startX
+    @y = @player.y
 
   getStrength: ->
     return @_strength + @_superBall

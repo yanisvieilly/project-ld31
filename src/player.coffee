@@ -56,7 +56,7 @@ class Player extends Phaser.Sprite
     @ball.launch() if @ball.stopped()
 
   onBulletCollide: (player, bullet) ->
-    @life -= 10
+    @life -= LIVES_LOST_WITH_BULLETS
     bullet.kill()
 
   description: ->

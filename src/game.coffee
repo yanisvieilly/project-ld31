@@ -80,14 +80,14 @@ create = ->
   level = new Level level_map
   level.create()
 
-  playerOne = new Player game, 60, 300, 'paddleOne', up: Phaser.Keyboard.E, down: Phaser.Keyboard.D, shoot: Phaser.Keyboard.SPACEBAR, 0
-  playerTwo = new Player game, game.world.width - 60, 300, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN, shoot: Phaser.Keyboard.ENTER, 1
+  playerOne = new Player game, 60, START_Y, 'paddleOne', up: Phaser.Keyboard.E, down: Phaser.Keyboard.D, shoot: Phaser.Keyboard.SPACEBAR, Player.LEFT
+  playerTwo = new Player game, game.world.width - 60, START_Y, 'paddleTwo', up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN, shoot: Phaser.Keyboard.ENTER, Player.RIGHT
 
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
 
-  ballOne = new Ball game, playerOne.x + 25, 300, 'ballOne', playerOne
-  ballTwo = new Ball game, playerTwo.x - 25, 300, 'ballTwo', playerTwo
+  ballOne = new Ball game, playerOne.x + 25, START_Y, 'ballOne', playerOne
+  ballTwo = new Ball game, playerTwo.x - 25, START_Y, 'ballTwo', playerTwo
   playerOne.ball = ballOne
   playerTwo.ball = ballTwo
 
@@ -97,8 +97,8 @@ create = ->
   lifeTextOne = game.add.text 80, 20, "Life: #{playerOne.life}", fontSize: '32px', fill: '#FFF'
   lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.life}", fontSize: '32px', fill: '#FFF'
 
-  lineOne = new Line game, playerOne.x - 16, 0, 'lineOne'
-  lineTwo = new Line game, playerTwo.x + 13, 0, 'lineTwo'
+  lineOne = new Line game, playerOne.x - 16, 0, 'lineOne', playerOne
+  lineTwo = new Line game, playerTwo.x + 13, 0, 'lineTwo', playerTwo
   lines = game.add.group()
   lines.addMultiple [lineOne, lineTwo]
 
@@ -119,6 +119,9 @@ update = ->
 
   game.physics.arcade.collide ballOne, lineOne
   game.physics.arcade.collide ballTwo, lineTwo
+
+  game.physics.arcade.overlap ballOne, lineTwo, ballOne.onLineOverlap, null, ballOne
+  game.physics.arcade.overlap ballTwo, lineOne, ballTwo.onLineOverlap, null, ballTwo
 
   # game.physics.arcade.overlap playerOne, level.droppablesGroup, level.onPlayerDroppableOverlap
   # game.physics.arcade.overlap playerTwo, level.droppablesGroup, level.onPlayerDroppableOverlap

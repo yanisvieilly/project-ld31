@@ -1,5 +1,5 @@
 class Line extends Phaser.Sprite
-  constructor: (game, x, y, image) ->
+  constructor: (game, x, y, image, @player) ->
     super game, x, y, image
 
     @height = game.world.height
