@@ -90,8 +90,6 @@ create = ->
   playerOne = new Player game, 60, START_Y, Player.PaddleSize.DEFAULT, up: Phaser.Keyboard.E, down: Phaser.Keyboard.D, shoot: Phaser.Keyboard.SPACEBAR, Player.LEFT
   playerTwo = new Player game, game.world.width - 60, START_Y, Player.PaddleSize.DEFAULT, up: Phaser.Keyboard.UP, down: Phaser.Keyboard.DOWN, shoot: Phaser.Keyboard.ENTER, Player.RIGHT
 
-  playerTwo.setPaddleSize Player.PaddleSize.BIG
-
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
 
