@@ -39,7 +39,7 @@ class Player extends Phaser.Sprite
 
     @cursors.shoot.onDown.add @shoot, @
 
-    @health = 100
+    @health = PLAYER_MAX_HEALTH
 
     @immune = false
 
@@ -99,7 +99,7 @@ class Player extends Phaser.Sprite
         @displayWinText()
 
   addHealth: (value) ->
-    @health = Math.min(@health + value, 100)
+    @health = Math.min(@health + value, PLAYER_MAX_HEALTH)
 
   setImmune: (value) ->
     @immune = value

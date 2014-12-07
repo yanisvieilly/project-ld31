@@ -9,6 +9,8 @@ lifeTextOne = ''
 lifeTextTwo = ''
 lineOne = null
 lineTwo = null
+healthBarOne = null
+healthBarTwo = null
 level_map = [
   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
@@ -80,16 +82,12 @@ preload = ->
 
   game.load.image 'shield', 'lib/assets/img/shield.png'
 
+  HealthBar.loadAssets()
+
 create = ->
 
   game.physics.startSystem Phaser.Physics.ARCADE
-  # game.physics.arcade.checkCollision.left = false
-  # game.physics.arcade.checkCollision.right = false
 
-  # background = game.add.image 0, 0, 'background'
-  # background = new Phaser.TileSprite
-  # background.width = game.width
-  # background.height = game.height
   background = game.add.tileSprite 0, 0, game.width, game.height, 'background'
 
   level = new Level level_map
@@ -117,8 +115,8 @@ create = ->
   balls = game.add.group()
   balls.addMultiple [ballOne, ballTwo]
 
-  lifeTextOne = game.add.text 80, 20, "Life: #{playerOne.health}", fontSize: '32px', fill: '#FFF'
-  lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.health}", fontSize: '32px', fill: '#FFF'
+  # lifeTextOne = game.add.text 80, 20, "Life: #{playerOne.health}", fontSize: '32px', fill: '#FFF'
+  # lifeTextTwo = game.add.text game.world.width - 190, 20, "Life: #{playerTwo.health}", fontSize: '32px', fill: '#FFF'
 
   lineOne = new Line game, playerOne.x - 16, 0, 'lineOne', playerOne
   lineOne.body.width = playerOne.x - 13
@@ -132,14 +130,19 @@ create = ->
   lines = game.add.group()
   lines.addMultiple [lineOne, lineTwo]
 
+  healthBarOne = new HealthBar playerOne, 1, game, 10, 10
+  healthBarTwo = new HealthBar playerTwo, -1, game, game.width - HEALTHBAR_SIZE.width - 10, 10
+
 update = ->
   playerOne.update()
   playerTwo.update()
   ballOne.update()
   ballTwo.update()
+  healthBarOne.update()
+  healthBarTwo.update()
 
-  lifeTextOne.text = "Life: #{playerOne.health}"
-  lifeTextTwo.text = "Life: #{playerTwo.health}"
+  # lifeTextOne.text = "Life: #{playerOne.health}"
+  # lifeTextTwo.text = "Life: #{playerTwo.health}"
 
   game.physics.arcade.collide balls, level.bricksGroup, null, level.onBallBrickShouldCollide, level
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
