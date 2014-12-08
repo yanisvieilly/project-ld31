@@ -11,28 +11,60 @@ lineOne = null
 lineTwo = null
 healthBarOne = null
 healthBarTwo = null
+
+S = 'brk3_grey'
+B = 'brick_blue'
+Y = 'brick_yellow'
+G = 'brick_green'
+P = 'brick_purple'
+R = 'brick_red'
+V = 'void'
+
 level_map = [
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brick_red']
-  ['brick_blue', 'brick_purple']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brick_red']
-  ['brick_blue', 'brick_purple']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brick_red']
-  ['brick_blue', 'brick_purple']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
-  ['brick_blue', 'brick_red']
-  ['brick_blue', 'brick_purple']
+  [R, S, R],
+  [B, Y, S, Y, B],
+  [G, V, R, S, R, V, G],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [P, V, V, V, R, S, R, V, V, V, P],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [G, V, R, S, R, V, G],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [P, V, V, V, R, S, R, V, V, V, P],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [G, V, R, S, R, V, G],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [P, V, V, V, R, S, R, V, V, V, P],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [G, V, R, S, R, V, G],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [P, V, V, V, R, S, R, V, V, V, P],
+  [P, V, V, B, Y, S, Y, B, V, V, P],
+  [G, V, R, S, R, V, G],
+  [B, Y, S, Y, B],
+  [R, S, R],
 ]
+# level_map = [
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brick_red']
+#   ['brick_blue', 'brick_purple']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brick_red']
+#   ['brick_blue', 'brick_purple']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brick_red']
+#   ['brick_blue', 'brick_purple']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brk3_grey', 'void', 'brk3_grey', 'brick_blue']
+#   ['brick_blue', 'brick_red']
+#   ['brick_blue', 'brick_purple']
+# ]
 
 # loadSprite = (id, image, size) ->
 #   if size
@@ -142,9 +174,6 @@ update = ->
   healthBarTwo.update()
   level.update()
 
-  # lifeTextOne.text = "Life: #{playerOne.health}"
-  # lifeTextTwo.text = "Life: #{playerTwo.health}"
-
   game.physics.arcade.collide balls, level.bricksGroup, null, level.onBallBrickShouldCollide, level
   game.physics.arcade.collide balls, players, (ball, player) -> ball.onPlayerCollide player
 
@@ -157,8 +186,6 @@ update = ->
   game.physics.arcade.collide ballOne, lineTwo, ballOne.onLineOverlap, null, ballOne
   game.physics.arcade.collide ballTwo, lineOne, ballTwo.onLineOverlap, null, ballTwo
 
-  # game.physics.arcade.overlap playerOne, level.droppablesGroup, level.onPlayerDroppableOverlap
-  # game.physics.arcade.overlap playerTwo, level.droppablesGroup, level.onPlayerDroppableOverlap
   game.physics.arcade.overlap players, level.droppablesGroup, level.onPlayerDroppableOverlap
 
   game.physics.arcade.overlap playerOne.ship, level.droppablesGroup, (ship, droppable) -> level.onPlayerDroppableOverlap ship.player, droppable
