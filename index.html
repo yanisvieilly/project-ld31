@@ -2,6 +2,18 @@
 <html lang="en" class="">
 
 	<head>
+		<style>
+			@font-face {
+				font-family: "KenvectorFuture";
+				src: url('lib/assets/fonts/kenvector_future.ttf') format("truetype");
+			}
+
+			.fontPreload {
+				position: absolute;
+				left: -100px;
+			}
+		</style>
+
 		<script src="./lib/phaser.js" type="text/javascript"></script>
 		<script src="./dist/constants.js" type="text/javascript"></script>
 		<script src="./dist/brick.js" type="text/javascript"></script>
@@ -17,7 +29,7 @@
 	</head>
 
 	<body style="margin: 0px;">
-
+		<div class='fontPreload' style='font-family: KenvectorFuture;'>.</div>
 	</body>
 
 </html>

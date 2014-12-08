@@ -88,7 +88,7 @@ class Player extends Phaser.Sprite
 
   displayWinText: ->
     winner = if @id == Player.LEFT then 'Red' else 'Blue'
-    winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{winner} player wins!", font: 'bold 100px Arial', fill: '#FFF'
+    winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{winner} player wins!", font: 'bold 100px KenvectorFuture', fill: '#FFF'
     winningText.anchor.setTo 0.5, 0.5
 
   reduceHealth: (value) ->
