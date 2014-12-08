@@ -22,6 +22,8 @@ class Player extends Phaser.Sprite
 
     @anchor.setTo 0.5, 0.5
 
+    @name = if @id is Player.LEFT then 'Blue' else 'Red'
+
     @ball = null
     @line = null
 
@@ -86,17 +88,11 @@ class Player extends Phaser.Sprite
   description: ->
     "Player #{if @id == Player.LEFT then 'LEFT' else 'RIGHT'}"
 
-  displayWinText: ->
-    winner = if @id == Player.LEFT then 'Red' else 'Blue'
-    winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{winner} player wins!", font: 'bold 100px KenvectorFuture', fill: '#FFF'
-    winningText.anchor.setTo 0.5, 0.5
-
   reduceHealth: (value) ->
     unless @immune
       @health -= value
       if @health <= 0
         @health = 0
-        @displayWinText()
 
   addHealth: (value) ->
     @health = Math.min(@health + value, PLAYER_MAX_HEALTH)

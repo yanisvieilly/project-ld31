@@ -1,5 +1,5 @@
 class Level
-  constructor: (levelMap) ->
+  constructor: (levelMap, @playerOne, @playerTwo) ->
     @levelMap = levelMap
     @droppablesGroup = game.add.group()
 
@@ -49,6 +49,18 @@ class Level
   onPlayerDroppableOverlap: (player, droppable) ->
     droppable.onCatchBy player
     droppable.kill()
+
+  displayWinText: (player) ->
+    winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{player.name} player wins!", font: 'bold 100px KenvectorFuture', fill: '#FFF'
+    winningText.anchor.setTo 0.5, 0.5
+
+  endGame: ->
+    game.paused = true
+    @displayWinText if @playerOne.health is 0 then @playerOne else @playerTwo
+
+  update: ->
+    if @playerOne.health is 0 or @playerTwo.health is 0
+      @endGame()
 
   _addDroppable: (x, y, drop, direction) ->
     @droppablesGroup.add drop

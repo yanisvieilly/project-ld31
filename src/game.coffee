@@ -90,9 +90,6 @@ create = ->
 
   background = game.add.tileSprite 0, 0, game.width, game.height, 'background'
 
-  level = new Level level_map
-  level.create()
-
   playerOne = new Player game, 60, game.world.height / 2, Player.PaddleSize.DEFAULT,
     up: Phaser.Keyboard.E
     down: Phaser.Keyboard.D
@@ -106,6 +103,9 @@ create = ->
 
   players = game.add.group()
   players.addMultiple [playerOne, playerTwo]
+
+  level = new Level level_map, playerOne, playerTwo
+  level.create()
 
   ballOne = new Ball game, playerOne.x + 25, game.world.height / 2, 'ballOne', playerOne
   ballTwo = new Ball game, playerTwo.x - 25, game.world.height / 2, 'ballTwo', playerTwo
@@ -140,10 +140,7 @@ update = ->
   ballTwo.update()
   healthBarOne.update()
   healthBarTwo.update()
-
-  # Endgame
-  if playerOne.health is 0 or playerTwo.health is 0
-    game.paused = true
+  level.update()
 
   # lifeTextOne.text = "Life: #{playerOne.health}"
   # lifeTextTwo.text = "Life: #{playerTwo.health}"
