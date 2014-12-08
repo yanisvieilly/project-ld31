@@ -24,7 +24,7 @@ class HealthBar
 
   update: ->
     @game.world.bringToTop @barSprite
-    color = @_getHealthColor @player.health
+    color = @_getHealthColor (@player.health / PLAYER_MAX_HEALTH) * 100
     width = (@player.health / PLAYER_MAX_HEALTH) * HEALTHBAR_SIZE.width
 
     @barSprite.tint = Phaser.Color.getColor(color.r, color.g, color.b)
