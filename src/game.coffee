@@ -141,6 +141,10 @@ update = ->
   healthBarOne.update()
   healthBarTwo.update()
 
+  # Endgame
+  if playerOne.health is 0 or playerTwo.health is 0
+    game.paused = true
+
   # lifeTextOne.text = "Life: #{playerOne.health}"
   # lifeTextTwo.text = "Life: #{playerTwo.health}"
 
