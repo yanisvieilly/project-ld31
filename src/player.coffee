@@ -20,6 +20,9 @@ class Player extends Phaser.Sprite
   constructor: (game, x, y, size, cursors, @id) ->
     super game, x, y, @_getSpriteIdFromSize(size)
 
+    @initialX = x
+    @initialY = y
+
     @anchor.setTo 0.5, 0.5
 
     @name = if @id is Player.LEFT then 'Blue' else 'Red'
@@ -32,7 +35,7 @@ class Player extends Phaser.Sprite
       down: game.input.keyboard.addKey cursors.down
       shoot: game.input.keyboard.addKey cursors.shoot
 
-    @_weaponLevel = 0
+    # @_weaponLevel = 0
 
     game.physics.arcade.enable @
     @body.immovable = true
@@ -41,9 +44,9 @@ class Player extends Phaser.Sprite
 
     @cursors.shoot.onDown.add @shoot, @
 
-    @health = PLAYER_MAX_HEALTH
+    # @health = PLAYER_MAX_HEALTH
 
-    @immune = false
+    # @immune = false
 
     shipX = if @id is Player.LEFT then @x - 35 else @x + 35
     shipImage = if @id is Player.LEFT then 'shipOne' else 'shipTwo'
@@ -56,18 +59,22 @@ class Player extends Phaser.Sprite
     @shield.rotation = Math.PI if @id is Player.RIGHT
     @shield.visible = false
 
+    @reset()
+
+  reset: ->
+    # @x = @initialX
+    # @y = @initialY
+    @_moveTo @initialY
+    @_weaponLevel = 0
+    @health = PLAYER_MAX_HEALTH
+    @immune = false
+    @ball.respawn() if @ball
+
   update: ->
     if @cursors.up.isDown && @y > SPEED + @height / 2
-      @y -= SPEED
-      @ship.y -= SPEED
-      @shield.y -= SPEED
-      @ball.y -= SPEED if @ball.stopped()
+      @_moveTo @y - SPEED
     if @cursors.down.isDown && @y < game.world.height - @height / 2 - SPEED
-      @y += SPEED
-      @ship.y += SPEED
-      @shield.y += SPEED
-      @ball.y += SPEED if @ball.stopped()
-
+      @_moveTo @y + SPEED
   addWeaponLevel: (lvl) ->
     @_weaponLevel = CLAMP(@_weaponLevel + lvl, 0, WEAPON_MAX_LVL)
     console.log "#{@description()} weapon lvl is #{@_weaponLevel}"
@@ -119,3 +126,9 @@ class Player extends Phaser.Sprite
     spriteIds[Player.PaddleSize.BIG] = "paddle_#{color}_big"
     spriteIds[Player.PaddleSize.SMALL] = "paddle_#{color}_small"
     return spriteIds[size]
+
+  _moveTo: (y) ->
+    @y = y
+    @ship.y = y
+    @shield.y = y
+    @ball.y = y if @ball and @ball.stopped()

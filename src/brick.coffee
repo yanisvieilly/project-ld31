@@ -7,6 +7,7 @@ class Brick
       @revive()
 
     revive: ->
+      TIMER_STOP @_reviveTimer if @_reviveTimer
       @setHealth(@sprite.animations.frameTotal)
 
     getStrength: ->
@@ -36,7 +37,7 @@ class Brick
 
     break: =>
       @sprite.kill()
-      TIMER_START BRICK_RESPAWN_TIME, =>
+      @_reviveTimer = TIMER_START BRICK_RESPAWN_TIME, =>
         @sprite.revive()
         @revive()
 

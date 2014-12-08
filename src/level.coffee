@@ -19,21 +19,20 @@ class Level
       for tileName, tileIdx in line
         if tileName != 'void'
           brickSprite = @bricksGroup.create x, y, tileName
-          brickSprite.name = "tile_#{idx}"
+          brickSprite.name = "brick_#{idx}"
           @bricks[brickSprite.name] = new Brick(brickSprite)
         x += BRICK_SIZE.width
         idx++
 
-    ### FAKE DATA FOR TESTS ###
-    # for i in [0..0]
-    #   console.log 'drop'
-    #   d = Droppable.createFromType 'WEAPON', game
-    #   @_addDroppable 400, game.height / 2.0, d, -1
-    #
-    # # console.log 'start timer'
-    # TIMER_START 3, =>
-    #   d = Droppable.createFromType 'WEAPON', game
-    #   @_addDroppable 400, game.height / 2.0, d, -1
+  reset: ->
+    @bricksGroup.forEach (brickSprite) =>
+      brick = @bricks[brickSprite.name]
+      brick.revive()
+    @droppablesGroup.forEach (droppable) ->
+      droppable.kill()
+    @playerOne.reset()
+    @playerTwo.reset()
+    @hideWinningText()
 
   onBallBrickShouldCollide: (ball, brickSprite) ->
     brick = @bricks[brickSprite.name]
@@ -43,7 +42,6 @@ class Level
       y = brick.sprite.y + brick.sprite.height / 2.0 - res.droppable.height / 2.0
       direction = if ball.player.id == Player.RIGHT then 1 else -1
       @_addDroppable x, y, res.droppable, direction
-
     return !ball.hasSuperBall()
 
   onPlayerDroppableOverlap: (player, droppable) ->
@@ -51,8 +49,13 @@ class Level
     droppable.kill()
 
   displayWinText: (player) ->
-    winningText = game.add.text game.world.width / 2, game.world.height / 2, "#{player.name} player wins!", font: 'bold 100px KenvectorFuture', fill: '#FFF'
-    winningText.anchor.setTo 0.5, 0.5
+    centerX = game.world.width / 2
+    centerY = game.world.height / 2
+    @winningText = game.add.text centerX, centerY, "#{player.name} player wins!", font: 'bold 50px KenvectorFuture', fill: '#FFF'
+    @winningText.anchor.setTo 0.5, 0.5
+
+  hideWinningText: ->
+    game.world.remove(@winningText) if @winningText
 
   endGame: ->
     game.paused = true
