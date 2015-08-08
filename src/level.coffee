@@ -59,7 +59,7 @@ class Level
 
   endGame: ->
     game.paused = true
-    @displayWinText if @playerOne.health is 0 then @playerOne else @playerTwo
+    @displayWinText if @playerOne.health is 0 then @playerTwo else @playerOne
 
   update: ->
     if @playerOne.health is 0 or @playerTwo.health is 0
