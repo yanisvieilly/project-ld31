@@ -12,8 +12,32 @@
 				position: absolute;
 				left: -100px;
 			}
+
+			#help-box {
+				position: absolute;
+				width: 300px;
+				height: 200px;
+				background-color: rgba(0,0,0,0.6);
+				color: white;
+				padding: 20px;
+				font-family: Arial;
+				left: 50%;
+				top: 50%;
+				margin-left: -150px;
+				margin-top: -100px;
+			}
+
+			#help-box a.close {
+				display: block;
+				position: absolute;
+				right: 0;
+				top: 0;
+				color: white;
+			}
 		</style>
 
+		<script src="http://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+		
 		<script src="./lib/phaser.js" type="text/javascript"></script>
 		<script src="./dist/constants.js" type="text/javascript"></script>
 		<script src="./dist/brick.js" type="text/javascript"></script>
@@ -29,6 +53,21 @@
 	</head>
 
 	<body style="margin: 0px;">
+		<div id="help-box">
+			<a href="#" class="close">X</a>
+			<p>
+				<strong><u>Red Player</u></strong><br />
+				<strong>Up:</strong> &#8593;<br />
+				<strong>Down:</strong> &#8595;<br />
+				<strong>Launch & Shoot:</strong> ENTER
+			</p>
+			<p>
+				<strong><u>Blue Player</u></strong><br />
+				<strong>Up:</strong> E<br />
+				<strong>Down:</strong> D<br />
+				<strong>Launch & Shoot:</strong> SPACE
+			</p>
+		</div>
 		<div class='fontPreload' style='font-family: KenvectorFuture;'>.</div>
 	</body>
 
