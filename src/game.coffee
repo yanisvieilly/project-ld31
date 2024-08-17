@@ -191,7 +191,7 @@ update = ->
   game.physics.arcade.overlap playerOne.ship, level.droppablesGroup, (ship, droppable) -> level.onPlayerDroppableOverlap ship.player, droppable
   game.physics.arcade.overlap playerTwo.ship, level.droppablesGroup, (ship, droppable) -> level.onPlayerDroppableOverlap ship.player, droppable
 
-game = new Phaser.Game window.innerWidth, window.innerHeight, Phaser.AUTO, '', { preload: preload, create: create, update: update }
+game = new Phaser.Game window.innerWidth, window.innerHeight, Phaser.CANVAS, '', { preload: preload, create: create, update: update }
 
 $ ->
   hBox = $('#help-box')
